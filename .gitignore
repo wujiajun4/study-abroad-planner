@@ -1,0 +1,66 @@
+# macOS metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python (for eval scripts)
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node (for any tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json (use yarn.lock for deterministic installs)
+
+# Eval / test workspaces (skill-creator output)
+*-workspace/
+iteration-*/
+eval-*/
+benchmark.json
+benchmark.md
+grading.json
+feedback.json
+timing.json
+
+# Skill evaluation output that may accidentally contain user data
+test-outputs/
+test-runs/
+
+# User-generated reports that may contain PII
+# If you ever generate a report for a real person, do NOT commit it.
+# Move those reports outside the skill directory.
+user-reports/
+*-real-output.md
+*-user-data.md
+*-personal.md
+
+# Local env / secrets (defence in depth)
+.env
+.env.local
+*.local
+secrets.yaml
+secrets.json
+credentials/
+
+# Skill-specific: never commit local eval results or generated artifacts
+.claude/
+.cursor/
+.aider*
