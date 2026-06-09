@@ -4,6 +4,22 @@
 > or major public body. Never cite scraped / repackaged data. If a link
 > might be stale, mark it `[verify]` and remind the user to confirm.
 
+## ⚠️ Data Freshness Warning (v0.2.0+)
+
+The links below point to **public, real-time query endpoints**. The skill
+should **always direct the user to these live sources** instead of
+paraphrasing or memorising specific values. Common traps:
+
+- MLTSSL occupation list changes every financial year (1 July)
+- Each university's international tuition fee is reviewed annually
+- State nomination lists change without public notice
+- QILT employment / salary data updates once per year
+- Skills assessment body requirements (e.g. OTC, AHPRA) change
+
+**If the user asks "is X on the MLTSSL?" or "what's the 2026 fee for Y
+course?", do not answer from this file or `references/australia.md` —
+point them to the live query URL.**
+
 ## Australia (AU)
 
 | Need | Source |

@@ -4,6 +4,28 @@
 > Verify all links before recommending. Quotas and lists change every
 > financial year (1 July).
 
+## ⚠️ Data Freshness Warning (v0.2.0+)
+
+The static policy values in this file (EOI point table, visa subclass
+descriptions, English test mapping) are stable enough to memorise.
+**But anything that changes annually or per-cycle must point to a live
+query URL, not a quoted number**:
+
+| Data type | Static in this file? | Use live source instead |
+|-----------|----------------------|-------------------------|
+| EOI points table (categories, max points) | ✅ Yes (rarely changes) | — |
+| Visa subclass list (189/190/491/...) | ✅ Yes | — |
+| English test mapping (PTE / IELTS bands) | ✅ Yes | — |
+| **MLTSSL occupation list (212 items)** | ❌ No | https://www.anzscosearch.com/mltssl/ |
+| **State nomination occupation lists** | ❌ No | https://migration.sa.gov.au/before-applying/work-in-sa/occupation-lists/occupations-list |
+| **University tuition fees** | ❌ No | The university's own course page |
+| **QILT employment / salary data** | ❌ No | https://qilt.edu.au/comparED |
+| **Invitation round cutoffs (EOI scores)** | ❌ No | Home Affairs SkillSelect round data |
+| **Skills assessment authority list** | ❌ Yes (stable) | — |
+
+For dynamic data, the skill should refer users to `references/data-sources.md`
+and live URLs — **never** memorise specific values.
+
 ## Visa subclasses (the four you care about)
 
 | Subclass | Name | Sponsorship | PR path? | Best for |

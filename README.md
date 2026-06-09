@@ -37,6 +37,29 @@ You give it 6 things about yourself. It gives you a multi-year plan.
 
 ---
 
+## 🆕 v0.2.0 — CLI Helpers + Structured Data (2026-06-09)
+
+**v0.1 was static markdown docs. v0.2.0 adds a CLI toolset and a queryable JSON dataset:**
+
+| Tool | Use it for |
+|------|-----------|
+| `bin/eoi-calculator.mjs` | EOI points breakdown by age / English / qualification / state nomination — *10 seconds, no mental math* |
+| `bin/aus-course-filter.mjs` | Filter 10 courses by PTE / budget / regional / profession / path / prerequisites — *1 second, no grep* |
+| `data/australian-courses.json` | 10 courses × 12 fields (CDU / La Trobe / UTAS / Flinders / UniSA / CQU / UniMelb / USyd) — *queryable, version-controlled* |
+
+**Why it matters**: a privacy-first skill that *only* outputs markdown would still need the user (or agent) to manually re-derive EOI math, or grep through dozens of web pages. v0.2.0 ships the data + tools so the 6-section report is grounded in the same source the user can audit.
+
+**Live data sources** (instead of hand-quoted values that go stale):
+
+- MLTSSL occupation list → https://www.anzscosearch.com/mltssl/
+- QILT course + employment → https://qilt.edu.au/comparED
+- Skilled occupation list 2026 → https://www.australianvisaonline.com/occupations/skilled-occupation-list-sol-2026
+- Home Affairs points calculator → https://immi.homeaffairs.gov.au/help-support/tools/points-calculator
+
+The skill's `references/australia.md` and `references/data-sources.md` now point at these live sources for any value that changes annually.
+
+---
+
 ## 🛡️ Privacy
 
 **This skill contains zero personal data and stores nothing.** It is safe to

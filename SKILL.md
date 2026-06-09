@@ -1,5 +1,6 @@
 ---
 name: study-abroad-planner
+version: "0.2.0"
 description: >-
   Plan a study abroad + immigration pathway end-to-end. Collects the user's
   profile through conversation (age, English test score, education level,
@@ -11,8 +12,10 @@ description: >-
   EOI / 189 / 190 / 491 / 移民路径 / PR pathway / overseas university /
   postgraduate admission — even if the user does not explicitly ask for
   a "plan", only mentions one component (e.g. "EOI 打分" or "PTE 多少分
-  能上 X 大学"). Privacy-first: the skill contains ZERO personal data;
-  every value is provided by the user at invocation time.
+  能上 X 大学"). v0.2.0 adds bin/ CLI tools (eoi-calculator, aus-course-filter)
+  + data/ structured JSON for queryable school data. Privacy-first: the
+  skill contains ZERO personal data; every value is provided by the user
+  at invocation time.
 ---
 
 # Study Abroad Planner
