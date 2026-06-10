@@ -52,6 +52,10 @@ user-reports/
 *-user-data.md
 *-personal.md
 
+# v0.3.1: synthesise.mjs audit logs (runtime data, not source)
+# Each synthesise call appends a JSON line; not for source control.
+logs/
+
 # Local env / secrets (defence in depth)
 .env
 .env.local

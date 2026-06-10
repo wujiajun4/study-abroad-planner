@@ -37,6 +37,22 @@ You give it 6 things about yourself. It gives you a multi-year plan.
 
 ---
 
+## 🆕 v0.3.1 — Freshness Policy + Synthesise Gate (2026-06-10)
+
+**v0.3.0 had a single 180-day freshness threshold for all data. v0.3.1 fixes that with a per-data-type policy table + override mechanism + gate wrapper:**
+
+| Tool | Use it for |
+|------|-----------|
+| `bin/release-precheck.mjs` | Pre-push orchestrator: PII scrub + source-validator in one call (100ms) |
+| `bin/synthesise.mjs` | **The gate every LLM must call before writing a report.** Reads release-precheck exit code, decides proceed/caveat/block, writes audit log |
+| `data/freshness-policy.json` | 9 `data_type` thresholds (e.g. `eoi_threshold` 7d warn / 30d error; `english_standard` 30d / 60d) |
+| `data/known-stale.json` | Official override mechanism — mark data as "best-available, intentionally not refreshed" with audit trail |
+| `data/source-tiers.json` | Now includes `domain_tiers` block (45 domains mapped; was hardcoded in .mjs) |
+
+**Why it matters**: when AHPRA ELS / DHA SkillSelect / state nomination rules change (which happens yearly), the v0.3.0 validator wouldn't catch it until 180 days passed. v0.3.1 catches the same change in 7-30 days **automatically** — no code change. The override mechanism also means known-stale historical data (e.g. SkillSelect round archive) doesn't block pushes.
+
+---
+
 ## 🆕 v0.3.0 — Honesty Pipeline + Source Validator (2026-06-10)
 
 **v0.2.0 shipped CLI tools. v0.3.0 adds a 5-step honesty pipeline so the report says what it doesn't know, not what looks plausible:**
@@ -194,14 +210,18 @@ study-abroad-planner/
 ├── bin/
 │   ├── eoi-calculator.mjs       # EOI points breakdown CLI
 │   ├── aus-course-filter.mjs    # Course filter by PTE/budget/regional/prereq
-│   └── source-validator.mjs     # v0.3.0 — 5-tier source classifier + freshness check
+│   ├── source-validator.mjs     # 5-tier source classifier + freshness-by-policy check
+│   ├── release-precheck.mjs     # v0.3.1 — orchestrator: PII + validator in one call
+│   └── synthesise.mjs           # v0.3.1 — gate wrapper (LLM must call before writing report)
 ├── data/
-│   ├── australian-courses.json            # 11 courses × ~15 fields (v0.3.0)
-│   ├── source-tiers.json                  # v0.3.0 — domain → tier mapping
-│   ├── ahpra-english-standard.json        # v0.3.0 — 3 gates + 4 ELS exemptions
+│   ├── australian-courses.json            # 11 courses × ~15 fields
+│   ├── source-tiers.json                  # 5-tier definitions + 45 domain mappings
+│   ├── freshness-policy.json              # v0.3.1 — 9 data_type thresholds
+│   ├── known-stale.json                   # v0.3.1 — official override mechanism
+│   ├── ahpra-english-standard.json        # 3 gates + 4 ELS exemptions
 │   ├── ahpra-ot-registration-pathway.json # OTBA Pathway A + OTC migration
-│   ├── seven-school-pr-pathway-comparison.json  # v0.3.0 — tiered honest format
-│   ├── cdu-ot-fieldwork-compliance.json   # v0.3.0 — 1000h + 6-item checklist
+│   ├── seven-school-pr-pathway-comparison.json  # tiered honest format
+│   ├── cdu-ot-fieldwork-compliance.json   # 1000h + 6-item checklist
 │   └── skillselect-ot-invitations.json    # Historical SkillSelect data
 ├── references/
 │   ├── australia.md         # Full AU 189/190/491 + EOI + QILT
@@ -308,6 +328,22 @@ grep -rhE "https?://[^ )]+" ~/.claude/skills/study-abroad-planner/ | wc -l
 ---
 
 # 🇨🇳 中文版
+
+## 🆕 v0.3.1 — 保鲜期政策 + 报告守门 (2026-06-10)
+
+**v0.3.0 所有数据共用 180 天保鲜期，v0.3.1 改成按 data_type 分级 + override + 守门 wrapper：**
+
+| 工具 | 用途 |
+|------|------|
+| `bin/release-precheck.mjs` | 发布前编排：PII 扫描 + 源校验一键（100ms）|
+| `bin/synthesise.mjs` | **LLM 写报告前必调的守门**。读 release-precheck 退出码，决定 proceed/caveat/block，写审计日志 |
+| `data/freshness-policy.json` | 9 个 `data_type` 阈值（如 `eoi_threshold` 7d warn / 30d error；`english_standard` 30d / 60d）|
+| `data/known-stale.json` | 官方 override 机制 — 标"明知过期但用这个"并留审计痕迹 |
+| `data/source-tiers.json` | 新增 `domain_tiers` 块（45 个域名映射；之前硬编码在 .mjs）|
+
+**为什么重要**：当 AHPRA ELS / DHA SkillSelect / 州担保规则变更（每年都会发生），v0.3.0 validator 要 180 天才察觉。v0.3.1 **7-30 天自动捕获**——不用改代码。Override 机制也让已知过期的历史数据（如 SkillSelect 归档轮次）不再 block push。
+
+---
 
 ## 🆕 v0.3.0 — 诚实 Pipeline + 源校验器 (2026-06-10)
 
@@ -417,14 +453,18 @@ study-abroad-planner/
 ├── bin/
 │   ├── eoi-calculator.mjs       # EOI 打分 CLI
 │   ├── aus-course-filter.mjs    # 按 PTE/预算/偏远/前置 筛选课程
-│   └── source-validator.mjs     # v0.3.0 — 5 级源分类 + 保鲜期检查
+│   ├── source-validator.mjs     # 5 级源分类 + 按政策检查保鲜期
+│   ├── release-precheck.mjs     # v0.3.1 — 编排器：PII + validator 一键跑
+│   └── synthesise.mjs           # v0.3.1 — 守门 wrapper（LLM 写报告前必调）
 ├── data/
-│   ├── australian-courses.json            # 11 校 × 15 字段 (v0.3.0)
-│   ├── source-tiers.json                  # v0.3.0 — domain → tier 映射
-│   ├── ahpra-english-standard.json        # v0.3.0 — 3 道英语门 + 4 豁免路径
+│   ├── australian-courses.json            # 11 校 × 15 字段
+│   ├── source-tiers.json                  # 5 级定义 + 45 域名映射
+│   ├── freshness-policy.json              # v0.3.1 — 9 个 data_type 阈值
+│   ├── known-stale.json                   # v0.3.1 — 官方 override 机制
+│   ├── ahpra-english-standard.json        # 3 道英语门 + 4 豁免路径
 │   ├── ahpra-ot-registration-pathway.json # OTBA Pathway A + OTC 移民评估
-│   ├── seven-school-pr-pathway-comparison.json  # v0.3.0 — 分级诚实格式
-│   ├── cdu-ot-fieldwork-compliance.json   # v0.3.0 — 1000h + 6 项合规清单
+│   ├── seven-school-pr-pathway-comparison.json  # 分级诚实格式
+│   ├── cdu-ot-fieldwork-compliance.json   # 1000h + 6 项合规清单
 │   └── skillselect-ot-invitations.json    # SkillSelect 历史数据
 ├── references/
 │   ├── australia.md         # 完整 AU 189/190/491 + EOI + QILT

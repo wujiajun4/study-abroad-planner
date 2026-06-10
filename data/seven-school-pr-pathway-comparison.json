@@ -250,7 +250,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "Workforce by state (Table 1.1)"
+      "use": "Workforce by state (Table 1.1)",
+      "data_type": [
+        "register_data_static"
+      ]
     },
     {
       "name": "AHPRA OT Registrant Data Q1 2025",
@@ -258,7 +261,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "Total registrants 34,143 (March 2025)"
+      "use": "Total registrants 34,143 (March 2025)",
+      "data_type": [
+        "register_data_static"
+      ]
     },
     {
       "name": "AHPRA Annual Report 2022/23",
@@ -266,7 +272,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "109 OTs per 100,000 head of population"
+      "use": "109 OTs per 100,000 head of population",
+      "data_type": [
+        "register_data_static"
+      ]
     },
     {
       "name": "DoH Workforce Data — Allied Health",
@@ -274,7 +283,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "OTs per 100k by state (NT 73.5, TAS 73.5, VIC 137.2, SA 123.8, WA 109.5, NSW 93.7, QLD 109.0, ACT 93.8)"
+      "use": "OTs per 100k by state (NT 73.5, TAS 73.5, VIC 137.2, SA 123.8, WA 109.5, NSW 93.7, QLD 109.0, ACT 93.8)",
+      "data_type": [
+        "register_data_static"
+      ]
     },
     {
       "name": "QILT Course & Employment Outcomes",
@@ -282,7 +294,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "FT employment % per course"
+      "use": "FT employment % per course",
+      "data_type": [
+        "register_data_static"
+      ]
     },
     {
       "name": "DHA FOI 252411 visa grants 2016-2020",
@@ -290,7 +305,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "189 = 239 OTs granted, 190 = 109 OTs granted (2016-2020 cumulative)"
+      "use": "189 = 239 OTs granted, 190 = 109 OTs granted (2016-2020 cumulative)",
+      "data_type": [
+        "visa_allocation"
+      ]
     },
     {
       "name": "Skills Priority List 2025",
@@ -298,7 +316,10 @@
       "type": "Official — primary",
       "reliability": "high",
       "retrieved": "2026-06-09",
-      "use": "OT in shortage in all 8 states/territories"
+      "use": "OT in shortage in all 8 states/territories",
+      "data_type": [
+        "occupation_list"
+      ]
     }
   ]
 }

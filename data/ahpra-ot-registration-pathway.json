@@ -146,7 +146,6 @@
     ],
     "earliest_invite_estimate": "Within 4-8 months of graduation (assuming eligibility thresholds met at lodgement)"
   },
-
   "v0_3_0_real_world_findings": {
     "what_actually_happens_for_cdu_graduate": [
       "Pathway A outcome 'substantially equivalent' (most likely for CDU Master) → General Registration direct, no supervised practice required",
@@ -182,49 +181,70 @@
       "url": "https://www.ahpra.gov.au/Registration/International-practitioners",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "AHPRA Occupational Therapy Board — Competence Assessment",
       "url": "https://www.occupationaltherapyboard.gov.au/Registration/Internationally-qualified-occupational-therapists/Competence-assessment.aspx",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "OTC Assessment for Skilled Migration",
       "url": "https://www.otcouncil.com.au/assessment/assessment-from-overseas/",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "OTC New Pathways Communique (May 2025)",
       "url": "https://www.otcouncil.com.au/communique-from-otba-new-pathways-to-registration-and-international-qualification-assessments-from-late-2025-may-2025/",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "CanApprove OTC Skill Assessment Guide",
       "url": "https://canapprove.com/blog/otc-skill-assessment-for-occupational-therapists/",
       "type": "Industry guide (republishes official info)",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "Mediix OT Registration Guide",
       "url": "https://mediix.com.au/how-to-register-as-an-occupational-therapists-in-australia/",
       "type": "Industry guide",
       "reliability": "medium-high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     },
     {
       "name": "AusPath Streamlined Pathways",
       "url": "https://www.crm.auspath.agency/occupationaltherapists/",
       "type": "Migration agency",
       "reliability": "medium-high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "skills_assessment_process"
+      ]
     }
   ],
   "key_caveats": [
@@ -234,5 +254,9 @@
     "PTE/IELTS test centres may have wait times — book 2-3 months in advance",
     "AHPRA qualification assessment outcome is NOT transferable to OTC migration assessment — they are separate processes with separate fees",
     "Supervised practice requires finding an Australian employer willing to sponsor limited registration — can be a bottleneck"
+  ],
+  "data_type": [
+    "english_standard",
+    "skills_assessment_process"
   ]
 }

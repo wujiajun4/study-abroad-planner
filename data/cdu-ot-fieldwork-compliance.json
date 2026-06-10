@@ -9,7 +9,6 @@
   "source_tier": "tier_1",
   "retrieved": "2026-06-10",
   "verified_by": "study-abroad-planner v0.3.0 fieldwork analysis",
-
   "practice_education_hours": {
     "total_mandated": 1000,
     "rationale": "World Federation of Occupational Therapists (WFOT) mandate + Australian Minimum Competency Standards for New Graduate Occupational Therapists (OTBA 2018)",
@@ -39,7 +38,6 @@
     "simulation_block_required": true,
     "simulation_block_hours": "30 hours on-campus per relevant unit (24 hours for OCC311/OCC512/OCC513)"
   },
-
   "pre_placement_compliance_requirements": {
     "mandatory": [
       {
@@ -71,7 +69,6 @@
     ],
     "estimated_total_compliance_cost_aud": "300-500 (police check + WWCC + immunisations + first aid + NDIS screening if needed)"
   },
-
   "placement_geo_constraints": {
     "rural_remote_placement_required": true,
     "duration": "5-8 weeks in regional or remote location",
@@ -85,13 +82,11 @@
       "self_funded": true
     }
   },
-
   "ahpra_student_registration": {
     "automatic": true,
     "mechanism": "CDU Faculty of Health registers all OT students with AHPRA under National Law",
     "student_action_required": "None — automatic upon enrolment in OT program"
   },
-
   "key_risks_for_user": [
     "1000 practice hours is mandatory — refusal of placement offer may jeopardise course completion (per CDU handbook)",
     "5-8 week rural/remote rotation is mandatory — must self-fund travel + accommodation",
@@ -99,13 +94,11 @@
     "NDIS Worker Screening may be required depending on host organisation — verify in advance",
     "AHPRA student registration is automatic but students must comply with legislative requirements under National Law"
   ],
-
   "cost_estimate_total": {
     "compliance_setup_first_year_aud": "300-500",
     "rural_placement_travel_estimate_aud": "1500-3000 (NT internal relocation + accommodation for 5-8 weeks)",
     "annual_renewal_aud": "100-200 (police check renewal + any updated immunisations)"
   },
-
   "user_specific_implications": {
     "before_applying": [
       "★ Confirm current immunisation status (especially COVID) — gaps will need filling",
@@ -117,5 +110,8 @@
       "Cannot defer immunisations / police check / WWCC — they must be valid for each placement block",
       "If placement offer is refused, may delay graduation by 6-12 months (per CDU handbook)"
     ]
-  }
+  },
+  "data_type": [
+    "course_facts"
+  ]
 }

@@ -368,3 +368,62 @@ v0.2.1 的能力是并列的;v0.3.0 要求**按固定顺序咬合执行**,信任
   - 评估 Professional Year / NAATI 等可加分项;
   - 必要时延后 EOI、补澳洲工作经验。
 - 每次刷新(validator 报告)后,对照触发器复核当前选路是否仍最优。
+
+---
+
+## 🆕 v0.3.1 — 高频变动项机制 (Freshness Policy · 政策类数据自动 hook)
+
+**问题**:v0.3.0 之前的 validator 用单一 180 天阈值检查所有数据。但政策类(英语线、EOI 分数线、配额)实际**比 180 天短得多就过时**,course facts 反而**比 180 天长得多也不影响**。两类数据共用同一阈值 = 错配。
+
+**修法**:把"保鲜期"从"写死的 180 天"升级成"按 `data_type` 分级的政策表"。
+
+### 工作流
+
+1. **数据文件加 `data_type` 字段**:每个 `source` 对象声明所属的政策类型:
+   ```json
+   "source": {
+     "course_page": "...",
+     "retrieved": "2026-06-09",
+     "data_type": ["course_facts", "english_standard", "tuition_fee"]
+   }
+   ```
+
+2. **`data/freshness-policy.json` 集中管理阈值**:
+   | data_type | warn_days | error_days | 含义 |
+   |-----------|----------:|-----------:|------|
+   | `english_standard` | 30 | 60 | AHPRA ELS / PTE 等价表 / DHA 积分换算 |
+   | `eoi_threshold` | 7 | 30 | SkillSelect 邀请轮 |
+   | `visa_allocation` | 7 | 14 | 州担保配额 |
+   | `skills_assessment_process` | 30 | 90 | OTC / AHPRA 评估流程 |
+   | `policy_decision` | 14 | 30 | 近期改革(27 Oct 2025 等)|
+   | `occupation_list` | 30 | 90 | MLTSSL / SOL 列表 |
+   | `course_facts` | 180 | 365 | duration, intake, prereq, scholarship |
+   | `tuition_fee` | 365 | 730 | 年度学费 |
+   | `register_data_static` | 730 | 1825 | QILT / AHPRA 慢变数据 |
+
+3. **`bin/source-validator.mjs` 自动按 policy 检查**:每个 retrieved 日期若超 warn → 标 ⚠️;超 error → 标 ❌(block synthesise)。
+
+4. **`bin/release-precheck.mjs` 一键跑 PII + validator**:pre-push 必跑。
+   ```bash
+   node bin/release-precheck.mjs              # exit 0/1/2
+   node bin/release-precheck.mjs --strict     # warnings 也 block
+   node bin/release-precheck.mjs --force      # 跳 PII (已知会过)
+   ```
+
+5. **新增 `data_type` 类型时**:先在 `freshness-policy.json` 加规则,再在数据文件用——不要写死数字。
+
+### Synthesise Gate 规则
+
+合成 6 段报告前**必须**先跑 `release-precheck`:
+- **exit 0** → clean,照常 synthesise
+- **exit 2** → 有 freshness warnings,允许 synthesise 但报告**必须**加 `data_staleness` footer 列出哪些字段过期
+- **exit 1** → 有 PII / tier_5 / 严重过期,**拒绝** synthesise,先修
+
+### 杠杆:为什么这是"修一处,治一类"
+
+下次 AHPRA ELS 标准变更(可能是 76 speaking,可能别的)——
+- 旧机制:你得在 `data/ahpra-english-standard.json` 改 `pte_each_band_min: 65` → 新数字,commit,推
+- **新机制**:数据本身 `retrieved` 日期一过 30 天 warn / 60 天 error,validator 自动报警——
+  **不用碰数字**,只需要去 AHPRA 官方页拉一次,把 `retrieved` 改成今天
+
+English 不是唯一的高频项。`visa_allocation`(配额 7 天)、`eoi_threshold`(7 天)、`policy_decision`(14 天)也都在这个机制保护下。任何政策类数据自动 hook,不需要每次新增类型都改 validator 代码。

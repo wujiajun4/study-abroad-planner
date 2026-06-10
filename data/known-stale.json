@@ -1,0 +1,102 @@
+{
+  "$schema": "study-abroad-planner v0.3.1 known-stale override schema",
+  "version": "0.3.1",
+  "last_updated": "2026-06-10",
+  "schema_note": "Official override mechanism for known-stale data. Use when (1) data is past warn/error threshold per data/freshness-policy.json, but (2) the operator has confirmed this is the best-available data and pushing with staleness is acceptable. Each override documents: which field, why it can't be refreshed, when the override expires, who signed off. Validator / release-precheck / synthesise.mjs all read this file and suppress corresponding warnings (changing them from error/warn to 'OVERRIDE' status). Empty overrides = no overrides active.",
+
+  "override_policy": {
+    "purpose": "Allow push with known-stale data when no better source is available, with audit trail.",
+    "suppresses": "Warnings/errors in source-validator and release-precheck for the matching (file, source_key, retrieved_date) combo.",
+    "does_not_suppress": "PII hits, tier_5 social media URLs, or JSON parse errors. Those remain hard blocks.",
+    "audit": "Each override is signed + dated + has an expiration. Expired overrides are treated as if absent (warning re-fires).",
+    "best_practice": "Override should be the LAST resort. If a data source can be re-fetched, refresh the retrieved date instead of using this file."
+  },
+
+  "overrides": [
+    {
+      "id": "skillselect-2023-05-25-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[0] (date: 2023-05-25)",
+      "retrieved": "2023-05-25",
+      "data_type": "eoi_threshold",
+      "override_reason": "Historical SkillSelect round. DHA does not re-publish old round data after program year close. This is the official archive snapshot. Re-fetching from DHA SkillSelect dashboard would not return a fresher 'retrieved' date — the data itself is the historical truth.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10",
+      "verification_steps_taken": [
+        "Checked DHA SkillSelect previous-rounds page — past rounds listed but no refresh date",
+        "Confirmed with visaiq / immitrend / ONEderland archives — same data, all cite DHA as source",
+        "Verdict: this is the canonical historical record, not a stale fetch"
+      ]
+    },
+    {
+      "id": "skillselect-2024-06-13-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[1] (date: 2024-06-13)",
+      "retrieved": "2024-06-13",
+      "data_type": "eoi_threshold",
+      "override_reason": "Same as skillselect-2023-05-25-historical. Historical SkillSelect round, no DHA refresh mechanism.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10"
+    },
+    {
+      "id": "skillselect-2024-09-05-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[2] (date: 2024-09-05)",
+      "retrieved": "2024-09-05",
+      "data_type": "eoi_threshold",
+      "override_reason": "Same as skillselect-2023-05-25-historical.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10"
+    },
+    {
+      "id": "skillselect-2024-11-07-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[3] (date: 2024-11-07)",
+      "retrieved": "2024-11-07",
+      "data_type": "eoi_threshold",
+      "override_reason": "Same as skillselect-2023-05-25-historical.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10"
+    },
+    {
+      "id": "skillselect-2025-08-21-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[4] (date: 2025-08-21)",
+      "retrieved": "2025-08-21",
+      "data_type": "eoi_threshold",
+      "override_reason": "Same as skillselect-2023-05-25-historical.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10"
+    },
+    {
+      "id": "skillselect-2025-11-13-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[5] (date: 2025-11-13)",
+      "retrieved": "2025-11-13",
+      "data_type": "eoi_threshold",
+      "override_reason": "Same as skillselect-2023-05-25-historical.",
+      "override_until": "2099-12-31",
+      "signed_by": "user",
+      "signed_at": "2026-06-10"
+    },
+    {
+      "id": "skillselect-2026-02-28-historical",
+      "file": "data/skillselect-ot-invitations.json",
+      "field": "invitation_rounds[6] (date: 2026-02-28)",
+      "retrieved": "2026-02-28",
+      "data_type": "eoi_threshold",
+      "override_reason": "Most recent round before this v0.3.1 release. Re-fetch from DHA for next release (v0.3.2 or later).",
+      "override_until": "2026-09-30",
+      "signed_by": "user",
+      "signed_at": "2026-06-10",
+      "action_required": "Re-fetch from https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds before 2026-09-30, or extend override."
+    }
+  ],
+
+  "use": "Both bin/source-validator.mjs and bin/release-precheck.mjs read this file. For each warning/error of the form 'data stale / expired (N days > M day threshold, data_type=X) — YYYY-MM-DD', check if (file, retrieved_date, data_type) matches any override. If yes AND override not expired, suppress the warning/error and add '[OVERRIDE: <id>]' annotation to validator output."
+}

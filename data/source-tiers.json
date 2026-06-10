@@ -99,5 +99,66 @@
     "bad": "CDU Master of OT — tuition $34,736/y ✅  (no date, no tier)",
     "bad": "OT cutoff 65  (no source, no tier, no date — forbidden)",
     "bad": "User said on Reddit 189 will be 90 next year ❌ (tier 5, banned)"
+  },
+
+  "domain_tiers": {
+    "_comment": "v0.3.1: explicit domain → tier mapping. Used by source-validator.mjs instead of hardcoded const. Future tier additions: edit this file, no code change needed. Tier rules: .gov.au/.edu.au primary; .com.au/.org.au = evaluate per source; reddit/facebook/x = tier_5.",
+    "_ordering": "longest domain first when ambiguous (e.g. immi.homeaffairs.gov.au before homeaffairs.gov.au).",
+    "tier_1": {
+      "immi.homeaffairs.gov.au": "Department of Home Affairs — SkillSelect, EOI calculator, visa subclasses",
+      "homeaffairs.gov.au": "DHA (parent domain, fallback for other DHA pages)",
+      "cdu.edu.au": "Charles Darwin University",
+      "utas.edu.au": "University of Tasmania",
+      "latrobe.edu.au": "La Trobe University",
+      "unisa.edu.au": "University of South Australia",
+      "flinders.edu.au": "Flinders University",
+      "cqu.edu.au": "CQUniversity Australia",
+      "study.unimelb.edu.au": "University of Melbourne (study portal)",
+      "unimelb.edu.au": "University of Melbourne (parent domain)",
+      "sydney.edu.au": "University of Sydney",
+      "monash.edu": "Monash University",
+      "ahpra.gov.au": "Australian Health Practitioner Regulation Agency",
+      "occupationaltherapyboard.gov.au": "OTBA (board under AHPRA)",
+      "otcouncil.com.au": "Occupational Therapy Council (assessing authority, not regulator)",
+      "cricos.education.gov.au": "CRICOS — Commonwealth Register of Institutions and Courses",
+      "qilt.edu.au": "Quality Indicators for Learning and Teaching",
+      "jobsandskills.gov.au": "Jobs and Skills Australia — Skills Priority List",
+      "parliament.nsw.gov.au": "NSW Parliament (hosts AHPRA annual reports)",
+      "hwd.health.gov.au": "Department of Health — Health Workforce Data",
+      "studyaustralia.gov.au": "Australian Government study portal",
+      "australiasnorthernterritory.com.au": "NT Government migration portal"
+    },
+    "tier_2": {
+      "studymelbourne.vic.gov.au": "VIC Government study portal (paraphrase of uni data, not source-of-truth)"
+    },
+    "tier_3": {
+      "_comment": "Currently no tier_3 sources in v0.3.1 data. Add here when OTA / industry bodies are cited."
+    },
+    "tier_4": {
+      "immitrend.com.au": "Immitrend — pool analytics, cutoff predictions",
+      "migrationpages.com.au": "MigrationPages — invitation round tracker",
+      "visasidekick.com.au": "Visa Sidekick — republishes DHA official lists",
+      "visaiq.com.au": "VisaIQ — 189 live tracker",
+      "smartvisaguide.com": "SmartVisaGuide — paid tier with DHA data",
+      "onederland.com.au": "ONEderland Consulting — March 2026 OT range",
+      "easymigrate.com": "EasyMigrate — migration agency blog",
+      "kaimah.co.nz": "Kaimah — NZ/AU migration blog",
+      "swainz.com": "Swainz — migration blog",
+      "kbaglobal.com": "KBA Global — migration blog",
+      "mediix.com.au": "Mediix — health profession recruitment blog",
+      "canapprove.com": "CanApprove — migration agency blog",
+      "crm.auspath.agency": "AusPath — migration agency",
+      "globalconsult.com.au": "Global Consult — migration blog",
+      "ahclawyers.com": "AHClawyers — migration law firm blog",
+      "immigrationxperts.com": "ImmigrationXperts — migration blog"
+    },
+    "tier_5": {
+      "reddit.com": "Reddit (r/AusVisa, r/ImmigrationCanada, etc.)",
+      "facebook.com": "Facebook groups (Australia Skilled Visa, etc.)",
+      "whirlpool.net.au": "Whirlpool forums",
+      "youtube.com": "YouTube (treat as user content unless official channel)",
+      "twitter.com": "Twitter / X",
+      "x.com": "X (formerly Twitter)"
+    }
   }
 }

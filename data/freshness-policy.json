@@ -1,0 +1,108 @@
+{
+  "$schema": "study-abroad-planner v0.3.1 freshness policy schema",
+  "version": "0.3.1",
+  "last_updated": "2026-06-10",
+  "schema_note": "Declares how often each data type should be re-verified against its official source. Items with `retrieved` date older than the warn threshold are flagged in validator output (exit 2). Items older than the error threshold block the synthesise step (exit 1). Policy decisions are explicit + auditable — adjust here when AHPRA/DHA/uni pages shift policy cadence. v0.3.1 mechanism: every policy-driven value is now short-lived + auto-checked. Don't write policy numbers as static constants — always reference this file.",
+
+  "policy": {
+    "english_standard": {
+      "warn_days": 30,
+      "error_days": 60,
+      "rationale": "AHPRA ELS / DHA English requirements can change with policy reviews. Should re-verify monthly against the official ELS page.",
+      "source_urls": [
+        "https://www.ahpra.gov.au/Registration/Registration-Standards/English-language-skills/English-language-skills-registration-standard.aspx",
+        "https://immi.homeaffairs.gov.au/help-support/tools/points-calculator"
+      ],
+      "applies_to_data_types": [
+        "ahpra-english-standard.json",
+        "ahpra-ot-registration-pathway.json (english_requirements sections)"
+      ]
+    },
+
+    "skills_assessment_process": {
+      "warn_days": 30,
+      "error_days": 90,
+      "rationale": "OTC / AHPRA qualification assessment processes shift with major reforms (e.g. 27 Oct 2025 reform moved registration assessment from OTC to AHPRA/OTBA). Monthly check after any announced reform.",
+      "applies_to_data_types": [
+        "ahpra-ot-registration-pathway.json (pathway steps, fees, timelines)"
+      ]
+    },
+
+    "eoi_threshold": {
+      "warn_days": 7,
+      "error_days": 30,
+      "rationale": "SkillSelect invitation rounds are quarterly. Between rounds, floor scores can shift ±5-10 points. Weekly check during invitation windows.",
+      "applies_to_data_types": [
+        "skillselect-ot-invitations.json (round data + threshold)"
+      ]
+    },
+
+    "occupation_list": {
+      "warn_days": 30,
+      "error_days": 90,
+      "rationale": "MLTSSL / ROL / SOL update with each program year (typically July). Monthly check after July program year start.",
+      "applies_to_data_types": [
+        "seven-school-pr-pathway-comparison.json (occupation status, EOI bonus)",
+        "australian-courses.json (ANZSCO references)"
+      ]
+    },
+
+    "visa_allocation": {
+      "warn_days": 7,
+      "error_days": 14,
+      "rationale": "State nomination allocations (190/491) can be exhausted mid-program-year without warning (e.g. NT 2025-26 closed 2026-01-26). Weekly check mandatory.",
+      "applies_to_data_types": [
+        "seven-school-pr-pathway-comparison.json (state_nomination_*_difficulty field)"
+      ]
+    },
+
+    "tuition_fee": {
+      "warn_days": 365,
+      "error_days": 730,
+      "rationale": "Annual refresh in January (university calendar). Two-year tolerance for planning reports — by then the student would have applied.",
+      "applies_to_data_types": [
+        "australian-courses.json (tuition_aud_per_year, tuition_total_aud_2y)"
+      ]
+    },
+
+    "course_facts": {
+      "warn_days": 180,
+      "error_days": 365,
+      "rationale": "Course duration, intake months, PTE/IELTS, prereqs, scholarships shift year-to-year but rarely mid-year. Semester refresh.",
+      "applies_to_data_types": [
+        "australian-courses.json (duration, intake, pte_*, ielts_*, prereq, scholarship)",
+        "cdu-ot-fieldwork-compliance.json (placement hours, compliance items)"
+      ]
+    },
+
+    "policy_decision": {
+      "warn_days": 14,
+      "error_days": 30,
+      "rationale": "Recent reforms (e.g. 27 Oct 2025 OTBA pathway, Dec 2025 AHPRA consultation closing 9 Feb 2026) — 2-week check after formalisation, then monthly.",
+      "applies_to_data_types": [
+        "ahpra-ot-registration-pathway.json (key_dates, post_graduation_timeline)",
+        "data/source-tiers.json (only if a domain reclassifies)"
+      ]
+    },
+
+    "register_data_static": {
+      "warn_days": 730,
+      "error_days": 1825,
+      "rationale": "Domain tier mappings and skill-selection data (QILT, AHPRA workforce stats) are slow-moving. 2-year check, 5-year error.",
+      "applies_to_data_types": [
+        "source-tiers.json",
+        "QILT reference in seven-school-pr-pathway-comparison.json"
+      ]
+    }
+  },
+
+  "exit_codes": {
+    "0": "clean — all data within freshness thresholds + no PII hits + no source-tier issues",
+    "1": "ERRORS — at least one data_type exceeds error threshold OR PII hit OR tier_5 social media source. Blocks synthesise step. Cannot push without remediation.",
+    "2": "WARNINGS — at least one data_type exceeds warn threshold. Synthesise step continues but report must include staleness caveat. Push allowed with explicit override."
+  },
+
+  "synthesise_gate_rule": "Before generating the 6-section report, run `node bin/release-precheck.mjs`. If exit code is 1, refuse to synthesise. If exit code is 2, synthesise but add a 'data_staleness' footer listing which fields are past warn threshold. This is the auto-catch for AHPRA ELS changes (#1) and similar policy shifts — the next time the policy moves, the warn will fire automatically without code changes.",
+
+  "override_mechanism": "If a known-good reason exists to push despite warnings (e.g. mid-program-year data is best available), the operator can document it in `data/known-stale.json` (not yet built — v0.3.2 backlog) with: {field, retrieved, override_reason, override_until, signed_by}. Until then, push with warnings requires explicit `--force` flag in release-precheck."
+}

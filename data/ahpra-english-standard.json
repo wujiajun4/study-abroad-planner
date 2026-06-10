@@ -3,7 +3,6 @@
   "version": "0.3.0",
   "last_updated": "2026-06-10",
   "schema_note": "Reference data: 3 English gates (CDU entry / AHPRA ELS registration / EOI points) and 4 ELS exemption pathways. The binding constraint = the HIGHEST of the 3 gates. ELS exemption default = NOT SATISFIED for applicants without 6+ years of education in a recognised country. This file is reference data only — for per-applicant application, see examples/sample-output.md.",
-
   "three_english_gates": {
     "gate_1_cdu_entry": {
       "purpose": "CDU Master of OT admission",
@@ -36,7 +35,6 @@
     },
     "binding_constraint_rule": "HIGHEST of the 3 gates. AHPRA ELS (65 each) is binding for registration. EOI superior (79 each) is binding if aiming for +20 EOI points."
   },
-
   "els_exemption_pathways": {
     "purpose": "If applicant qualifies for an ELS exemption pathway, they don't need to sit the English test for AHPRA registration. ALL pathways require education in a RECOGNISED country.",
     "recognised_countries_ahpra_els": [
@@ -50,7 +48,6 @@
     ],
     "recognised_countries_source": "https://www.ahpra.gov.au/Registration/Registration-Standards/English-language-skills (per ELS standard)",
     "important_note": "CHINA is NOT on the recognised list. Undergrad in China does NOT count toward ELS exemption, regardless of language.",
-
     "pathway_a_primary_language": {
       "description": "English is your primary language AND you completed ALL education in Australia",
       "requirement": "Grew up and completed all primary + secondary + tertiary education in Australia"
@@ -67,10 +64,8 @@
       "description": "Primary + secondary school in English in recognised country + professional qualification taught and assessed in English (any country)",
       "requirement": "All primary + secondary school in recognised country, regardless of where the OT degree was taught"
     },
-
     "verdict": "Most international applicants fail all 4 ELS exemption pathways. ELS education exemption does NOT apply unless 6+ years in recognised country. Most applicants MUST achieve gate 2 (PTE 65 each) via the English test pathway to register with AHPRA."
   },
-
   "application_template": {
     "applicant_profile_placeholder": {
       "_comment": "Replace with your profile; evaluate which gate binds.",
@@ -88,15 +83,16 @@
       ]
     }
   },
-
   "placeholders_tbd_applicant_to_fill": [
     "Confirm exact PTE score mapping (AHPRA may accept PTE Academic or PTE General; verify)",
     "Confirm whether 2-year CDU Master alone counts as 'advanced education' under pathway c (it doesn't, but verify for alternate profiles)",
     "Confirm current 2025-26 EOI thresholds for OT 189 (current: 75-80; in case 4-year projection shifts)"
   ],
-
   "source_url": "https://www.ahpra.gov.au/Registration/Registration-Standards/English-language-skills/English-language-skills-registration-standard.aspx",
   "source_tier": "tier_1",
   "retrieved": "2026-06-10",
-  "verified_by": "study-abroad-planner v0.3.0 ELS analysis"
+  "verified_by": "study-abroad-planner v0.3.0 ELS analysis",
+  "data_type": [
+    "english_standard"
+  ]
 }

@@ -22,7 +22,10 @@
       "tie_break": "05/2023",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2024-06-13",
@@ -35,7 +38,10 @@
       "tie_break": "05/2024",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2024-09-05",
@@ -48,7 +54,10 @@
       "tie_break": "05/2024",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2024-11-07",
@@ -61,7 +70,10 @@
       "tie_break": "12/2022",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2025-08-21",
@@ -74,7 +86,10 @@
       "tie_break": "08/2025",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2025-11-13",
@@ -89,7 +104,10 @@
       "tie_break": "11/2025",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official + Visa Sidekick official list",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2025-11-13",
@@ -102,7 +120,10 @@
       "tie_break": "05/2025",
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "source_type": "DHA official",
-      "reliability": "high"
+      "reliability": "high",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "date": "2026-03",
@@ -118,7 +139,10 @@
       "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/dashboard",
       "source_type": "SkillSelect Dashboard (via ONEderland Consulting)",
       "reliability": "medium",
-      "verify_flag": "Single-source — cross-check with DHA official round announcement when published"
+      "verify_flag": "Single-source — cross-check with DHA official round announcement when published",
+      "data_type": [
+        "eoi_threshold"
+      ]
     }
   ],
   "fy2025_26_metrics": {
@@ -150,42 +174,60 @@
       "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "name": "DHA SkillSelect Dashboard",
       "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/dashboard",
       "type": "Official — primary",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "name": "Immitrend 189 Prediction",
       "url": "https://immitrend.com.au/189-prediction",
       "type": "3rd-party analysis",
       "reliability": "medium-high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "name": "MigrationPages Invitation Round Tracker",
       "url": "https://www.migrationpages.com.au/tools/invitation-round-tracker",
       "type": "3rd-party tracker",
       "reliability": "medium",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "name": "Visa Sidekick Official List FY2025-26",
       "url": "https://visasidekick.com.au/news/189-invitationround1-fy26-list2",
       "type": "Industry news (republishes DHA official list)",
       "reliability": "high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     },
     {
       "name": "VisaIQ 189 Live Tracker",
       "url": "https://www.visaiq.com.au/189-visa",
       "type": "3rd-party tracker",
       "reliability": "medium-high",
-      "retrieved": "2026-06-09"
+      "retrieved": "2026-06-09",
+      "data_type": [
+        "eoi_threshold"
+      ]
     }
   ],
   "caveats_and_limitations": [
@@ -194,5 +236,8 @@
     "491 family-sponsored stream uses different eligibility; 491 state-nominated invitations are issued continuously by states/territories and are NOT in this dataset",
     "The 65 → 85 cutoff shift in June 2024 is a known SkillSelect pattern: initial cutoff = top-ranked pool, then lifts as more invitations are issued against the ceiling",
     "All data is INFERRED from publicly republished DHA announcements. Verify against https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds for the final word"
+  ],
+  "data_type": [
+    "eoi_threshold"
   ]
 }

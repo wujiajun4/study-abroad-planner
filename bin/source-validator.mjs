@@ -1,12 +1,17 @@
 #!/usr/bin/env node
 /**
- * source-validator.mjs — v0.3.0 data health check
+ * source-validator.mjs — v0.3.1 data health check
  *
  * 扫 data/*.json 全部文件, 检出:
  * ① 来源 tier 分布 (tier_1 政府/大学 vs tier_4 聚合器 vs tier_5 社媒)
- * ② 数据保鲜期 (retrieved 日期 + freshness_periods_days)
+ * ② 数据保鲜期 (per data_type, 用 data/freshness-policy.json)
  * ③ verify_flag / TBD 标记
  * ④ 重大推荐证据是否仅靠 tier≥4
+ *
+ * v0.3.1 新增: 每个 source 对象可带 `data_type` 字段, validator 会按
+ * data/freshness-policy.json 里的 warn_days / error_days 阈值, 自动
+ * 把 retrieved 日期超期的标为 warn (exit 2) 或 error (exit 1).
+ * 这就是"高频变动项"机制 — 不需要每次手动改 warn threshold.
  *
  * 用法:
  *   node bin/source-validator.mjs              # 默认 (✅ + ⚠️ 都放过)
@@ -27,6 +32,7 @@ import { fileURLToPath } from 'node:url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const TIERS_FILE = path.join(DATA_DIR, 'source-tiers.json');
+const FRESHNESS_FILE = path.join(DATA_DIR, 'freshness-policy.json');
 
 // === CLI args ===
 const args = process.argv.slice(2);
@@ -34,9 +40,27 @@ const STRICT = args.includes('--strict');
 const JSON_OUT = args.includes('--json');
 const QUIET = args.includes('--quiet');
 
+// === Domain → tier mapping (v0.3.1: loaded from data/source-tiers.json) ===
+// Flatten {tier_X: {domain: note}} → {domain: tier_X}
+function buildDomainTiers(tiersDoc) {
+  if (!tiersDoc || !tiersDoc.domain_tiers) return {};
+  const flat = {};
+  for (const [tierName, entries] of Object.entries(tiersDoc.domain_tiers)) {
+    if (tierName.startsWith('_')) continue;  // skip _comment / _ordering
+    if (typeof entries !== 'object') continue;
+    for (const domain of Object.keys(entries)) {
+      if (domain.startsWith('_')) continue;
+      flat[domain] = tierName;
+    }
+  }
+  return flat;
+}
+
 // === Domain → tier mapping (default if no source-tiers.json override) ===
-const DOMAIN_TIERS = {
+// v0.3.1: prefer loaded from data file; fall back to hardcoded if file missing
+const HARDCODED_DOMAINS_FALLBACK = {
   'immi.homeaffairs.gov.au': 'tier_1',
+  'homeaffairs.gov.au': 'tier_1',
   'cdu.edu.au': 'tier_1',
   'utas.edu.au': 'tier_1',
   'latrobe.edu.au': 'tier_1',
@@ -44,18 +68,20 @@ const DOMAIN_TIERS = {
   'flinders.edu.au': 'tier_1',
   'cqu.edu.au': 'tier_1',
   'study.unimelb.edu.au': 'tier_1',
+  'unimelb.edu.au': 'tier_1',
   'sydney.edu.au': 'tier_1',
+  'monash.edu': 'tier_1',
   'ahpra.gov.au': 'tier_1',
   'occupationaltherapyboard.gov.au': 'tier_1',
   'otcouncil.com.au': 'tier_1',
   'cricos.education.gov.au': 'tier_1',
-  'homeaffairs.gov.au': 'tier_1',
   'qilt.edu.au': 'tier_1',
   'jobsandskills.gov.au': 'tier_1',
-  'parliament.nsw.gov.au': 'tier_1',  // AHPRA annual reports hosted
-  'hwd.health.gov.au': 'tier_1',  // Dept of Health workforce data
+  'parliament.nsw.gov.au': 'tier_1',
+  'hwd.health.gov.au': 'tier_1',
   'studyaustralia.gov.au': 'tier_1',
-  // Tier 4 — aggregators / republishers
+  'australiasnorthernterritory.com.au': 'tier_1',
+  'studymelbourne.vic.gov.au': 'tier_2',
   'immitrend.com.au': 'tier_4',
   'migrationpages.com.au': 'tier_4',
   'visasidekick.com.au': 'tier_4',
@@ -72,7 +98,6 @@ const DOMAIN_TIERS = {
   'globalconsult.com.au': 'tier_4',
   'ahclawyers.com': 'tier_4',
   'immigrationxperts.com': 'tier_4',
-  // Tier 5 — social media / forums
   'reddit.com': 'tier_5',
   'facebook.com': 'tier_5',
   'whirlpool.net.au': 'tier_5',
@@ -81,7 +106,10 @@ const DOMAIN_TIERS = {
   'x.com': 'tier_5',
 };
 
-// === Load source-tiers.json (for freshness periods) ===
+// Loaded later, after TIERS is loaded
+let DOMAIN_TIERS = {};
+
+// === Load source-tiers.json (for freshness periods + domain_tiers) ===
 let TIERS = null;
 try {
   TIERS = JSON.parse(fs.readFileSync(TIERS_FILE, 'utf8'));
@@ -90,6 +118,45 @@ try {
   TIERS = { freshness_periods_days: {} };
 }
 const FRESHNESS = TIERS.freshness_periods_days || {};
+// v0.3.1: domain_tiers from data file preferred; fall back to hardcoded
+DOMAIN_TIERS = Object.keys(buildDomainTiers(TIERS)).length > 0
+  ? buildDomainTiers(TIERS)
+  : HARDCODED_DOMAINS_FALLBACK;
+
+// === Load freshness-policy.json (v0.3.1 mechanism) ===
+let FRESHNESS_POLICY = null;
+try {
+  FRESHNESS_POLICY = JSON.parse(fs.readFileSync(FRESHNESS_FILE, 'utf8'));
+} catch (e) {
+  // Policy file missing → fall back to old single-threshold behavior
+  FRESHNESS_POLICY = { policy: {} };
+}
+const POLICY_RULES = FRESHNESS_POLICY.policy || {};
+
+// === Load known-stale.json (v0.3.1 override mechanism) ===
+const KNOWN_STALE_FILE = path.join(DATA_DIR, 'known-stale.json');
+let KNOWN_STALE = null;
+try {
+  KNOWN_STALE = JSON.parse(fs.readFileSync(KNOWN_STALE_FILE, 'utf8'));
+} catch (e) {
+  KNOWN_STALE = { overrides: [] };
+}
+const STALE_OVERRIDES = KNOWN_STALE.overrides || [];
+
+/**
+ * Check if a (file, date, data_type) triple matches an active known-stale override.
+ * Returns { matched: true, id: <id> } or { matched: false }.
+ */
+function checkStaleOverride(fileName, retrievedDate, dataTypes) {
+  for (const ov of STALE_OVERRIDES) {
+    if (ov.file && !fileName.endsWith(path.basename(ov.file))) continue;
+    if (ov.retrieved !== retrievedDate) continue;
+    if (ov.override_until && new Date(ov.override_until) < new Date()) continue;  // expired
+    if (ov.data_type && dataTypes && dataTypes.length > 0 && !dataTypes.includes(ov.data_type)) continue;
+    return { matched: true, id: ov.id || 'unknown', signed_by: ov.signed_by, override_until: ov.override_until };
+  }
+  return { matched: false };
+}
 
 // === Helpers ===
 function inferTierFromUrl(url) {
@@ -99,6 +166,11 @@ function inferTierFromUrl(url) {
   }
   return 'unknown';
 }
+
+// v0.3.1: meta-files that should be scanned for tier/url issues but NOT for freshness.
+// freshness-policy.json is the source-of-truth for thresholds (must not be self-referential).
+// known-stale.json contains historical retrieved dates by design (override mechanism).
+const FRESHNESS_EXEMPT_FILES = new Set(['freshness-policy.json', 'known-stale.json']);
 
 function daysSince(dateStr) {
   if (!dateStr) return null;
@@ -136,11 +208,13 @@ function freshnessStatus(retrieved) {
   return { status: '✅', age: ageDays, limit };
 }
 
-function deepFindUrlsAndFlags(obj, results = { urls: [], retrieved: [], verify_flags: [], tbds: [] }) {
+function deepFindUrlsAndFlags(obj, results = { urls: [], retrieved: [], data_types: [], verify_flags: [], tbds: [] }) {
   if (obj === null || obj === undefined) return results;
   if (typeof obj === 'string') {
     if (obj.match(/^https?:\/\//)) results.urls.push(obj);
-    if (obj.match(/^\d{4}-\d{2}-\d{2}/)) results.retrieved.push(obj);
+    // Only collect YYYY-MM-DD as "retrieved" when the KEY is exactly 'retrieved'
+    // (handled in the object branch below). Otherwise string like "date": "2024-06-13"
+    // would be mis-collected as a retrieval date.
     if (obj.toLowerCase().includes('tbd') || obj.toLowerCase().includes('verify_flag')) results.tbds.push(obj);
     return results;
   }
@@ -150,7 +224,19 @@ function deepFindUrlsAndFlags(obj, results = { urls: [], retrieved: [], verify_f
   }
   if (typeof obj === 'object') {
     for (const [key, val] of Object.entries(obj)) {
-      if (key === 'retrieved') results.retrieved.push(val);
+      if (key === 'retrieved') {
+        // Only count as retrieved if val is a YYYY-MM-DD string
+        if (typeof val === 'string' && val.match(/^\d{4}-\d{2}-\d{2}/)) {
+          results.retrieved.push(val);
+        }
+      }
+      if (key === 'data_type') {
+        if (Array.isArray(val)) {
+          for (const v of val) results.data_types.push(v);
+        } else {
+          results.data_types.push(val);
+        }
+      }
       if (key === 'verify_flag') results.verify_flags.push(val);
       deepFindUrlsAndFlags(val, results);
     }
@@ -162,6 +248,7 @@ function deepFindUrlsAndFlags(obj, results = { urls: [], retrieved: [], verify_f
 // === Main scan ===
 function scanFile(filePath) {
   const fileName = path.basename(filePath);
+  const isFreshnessExempt = FRESHNESS_EXEMPT_FILES.has(fileName);
   let data;
   try {
     data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
@@ -186,14 +273,50 @@ function scanFile(filePath) {
     urlDetails.push({ url: url.substring(0, 60) + (url.length > 60 ? '...' : ''), tier });
   }
 
-  // Check freshness on retrieved dates
-  const uniqueRetrieved = [...new Set(findings.retrieved)];
+  // Check freshness on retrieved dates — v0.3.1: per data_type using policy
+  // Skip for meta-files (freshness-policy.json, known-stale.json)
+  const uniqueRetrieved = isFreshnessExempt ? [] : [...new Set(findings.retrieved)];
+  const uniqueDataTypes = isFreshnessExempt ? [] : [...new Set(findings.data_types)];
+  if (!isFreshnessExempt) {
   for (const r of uniqueRetrieved) {
-    const fs = freshnessStatus(r);
-    if (fs.status === '⚠️') {
-      warnings.push(`${fileName}: data stale (${fs.age} days > ${fs.limit} day limit) — ${r}`);
+    // If data_type(s) specified, use the tightest threshold (most restrictive)
+    let tightestWarn = null;
+    let tightestError = null;
+    if (uniqueDataTypes.length > 0) {
+      for (const dt of uniqueDataTypes) {
+        const rule = POLICY_RULES[dt];
+        if (rule) {
+          if (tightestWarn === null || rule.warn_days < tightestWarn) tightestWarn = rule.warn_days;
+          if (tightestError === null || rule.error_days < tightestError) tightestError = rule.error_days;
+        }
+      }
+    }
+    // Fallback to old single-threshold if no data_type found
+    if (tightestWarn === null) {
+      const fs = freshnessStatus(r);
+      if (fs.status === '⚠️') {
+        warnings.push(`${fileName}: data stale (${fs.age} days > ${fs.limit} day limit) — ${r}`);
+      }
+      continue;
+    }
+    const age = daysSince(r);
+    if (age === null) continue;
+    // v0.3.1: check known-stale override before emitting warning/error
+    const override = checkStaleOverride(fileName, r, uniqueDataTypes);
+    if (override.matched) {
+      // Suppress warning/error, emit [OVERRIDE] annotation instead
+      if (age > tightestError) {
+        warnings.push(`[OVERRIDE: ${override.id}] ${fileName}: data EXPIRED but override active (until ${override.override_until}, signed by ${override.signed_by}) — ${r}`);
+      } else {
+        // Past warn but not error → silent (no need to annotate)
+      }
+    } else if (age > tightestError) {
+      errors.push(`${fileName}: data EXPIRED (${age} days > ${tightestError} day error threshold, data_type=${uniqueDataTypes.join(',')}) — ${r}`);
+    } else if (age > tightestWarn) {
+      warnings.push(`${fileName}: data stale (${age} days > ${tightestWarn} day warn threshold, data_type=${uniqueDataTypes.join(',')}) — ${r}`);
     }
   }
+  }  // end if (!isFreshnessExempt)
 
   // Check verify_flags (should be flagged for review)
   for (const vf of findings.verify_flags) {
@@ -279,7 +402,7 @@ function main() {
   } else {
     if (!QUIET) {
       console.log('━'.repeat(70));
-      console.log('🔍 study-abroad-planner v0.3.0 Source Validator');
+      console.log('🔍 study-abroad-planner v0.3.1 Source Validator');
       console.log('━'.repeat(70));
       console.log(`Mode: ${STRICT ? 'STRICT (warnings fail)' : 'normal (warnings exit 2)'}`);
       console.log(`Files scanned: ${results.length}`);
@@ -289,6 +412,7 @@ function main() {
       console.log(`  tier_5 (social media — BANNED): ${tier5Total}`);
       console.log(`  unknown: ${unknownTotal}`);
       console.log(`Errors: ${totalErrors} | Warnings: ${totalWarnings}`);
+      console.log(`Freshness policy: ${Object.keys(POLICY_RULES).length} data_types loaded from data/freshness-policy.json`);
       console.log('━'.repeat(70));
       console.log('');
 

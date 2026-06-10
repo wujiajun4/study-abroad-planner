@@ -4,9 +4,21 @@
   "last_updated": "2026-06-10",
   "schema_note": "Each entry is a CRICOS-registered Australian health-profession course. Tuition is for 2026 (indicative). Verify each field against the university's own page before recommending — see references/data-sources.md. Every course carries a `source` object recording the exact URL retrieved, retrieval date, and verification status. v0.3.0 changes: (1) 11 courses (Monash added); (2) La Trobe Bendigo → Bundoora corrected; (3) English requirements (IELTS) added as separate fields; (4) PTE test type verified (PTE Academic).",
   "filterable_fields": [
-    "school", "course", "anzsco", "profession", "tuition_aud_per_year",
-    "duration_years", "pte_overall_min", "pte_each_band_min", "gpa_min_7scale",
-    "regional", "scholarship_max_pct", "intake_months", "prereq", "url", "source"
+    "school",
+    "course",
+    "anzsco",
+    "profession",
+    "tuition_aud_per_year",
+    "duration_years",
+    "pte_overall_min",
+    "pte_each_band_min",
+    "gpa_min_7scale",
+    "regional",
+    "scholarship_max_pct",
+    "intake_months",
+    "prereq",
+    "url",
+    "source"
   ],
   "courses": [
     {
@@ -19,7 +31,9 @@
       "regional": true,
       "region_type": "NT (Category 3 — most regional bonus)",
       "duration_years": 2,
-      "intake_months": [2],
+      "intake_months": [
+        2
+      ],
       "tuition_aud_per_year": 34736,
       "tuition_total_aud_2y": 69472,
       "pte_overall_min": 65,
@@ -34,7 +48,12 @@
       "source": {
         "course_page": "https://www.cdu.edu.au/study/course/master-occupational-therapy-socth2",
         "retrieved": "2026-06-09",
-        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CRICOS + CDU handbook"
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CRICOS + CDU handbook",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -47,20 +66,29 @@
       "regional": true,
       "region_type": "NT (Category 3)",
       "duration_years": 2,
-      "intake_months": [2],
+      "intake_months": [
+        2
+      ],
       "tuition_aud_per_year": 34736,
       "tuition_total_aud_2y": 69472,
       "pte_overall_min": 65,
       "pte_each_band_min": 58,
       "gpa_min_7scale": 5.0,
-      "prereq": ["health-related bachelor (incl. biomedical science, science, health sciences, nutrition, food science, exercise science)"],
+      "prereq": [
+        "health-related bachelor (incl. biomedical science, science, health sciences, nutrition, food science, exercise science)"
+      ],
       "scholarship_max_pct": 30,
       "qilt_employment_ft_pct": 91.0,
       "url": "https://www.cdu.edu.au/study/course/master-dietetics-sdiet1",
       "source": {
         "course_page": "https://www.cdu.edu.au/study/course/master-dietetics-sdiet1",
         "retrieved": "2026-06-09",
-        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook"
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -72,7 +100,9 @@
       "campus": "Darwin NT",
       "regional": true,
       "duration_years": 4,
-      "intake_months": [2],
+      "intake_months": [
+        2
+      ],
       "tuition_aud_per_year": 35584,
       "tuition_total_aud_4y": 142336,
       "pte_overall_min": 65,
@@ -85,7 +115,12 @@
       "source": {
         "course_page": "https://www.cdu.edu.au/study/course/bachelor-health-sciencemaster-occupational-therapy-hhsot3",
         "retrieved": "2026-06-09",
-        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook"
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -98,7 +133,10 @@
       "campus_correction_v0_3_0": "v0.2.1 said 'Bendigo' but official 2026 handbook (https://handbook.latrobe.edu.au/courses/2026/hmoth) shows MOT is at Bundoora (Melbourne metro). Bendigo may have other health courses but NOT MOT. CRITICAL: Bundoora is NOT regional → no 491 bonus for this course.",
       "regional": false,
       "duration_years": 2,
-      "intake_months": [3, 7],
+      "intake_months": [
+        3,
+        7
+      ],
       "tuition_aud_per_year": 44500,
       "tuition_total_aud_2y": 89000,
       "pte_overall_min": 65,
@@ -106,7 +144,11 @@
       "ielts_overall_min": 7.0,
       "ielts_each_band_min": 7.0,
       "gpa_min_7scale": 5.0,
-      "prereq": ["Bachelor degree in any discipline", "WAM 65% minimum", "Recommended background: Health/education/social/psychological/biological sciences"],
+      "prereq": [
+        "Bachelor degree in any discipline",
+        "WAM 65% minimum",
+        "Recommended background: Health/education/social/psychological/biological sciences"
+      ],
       "placement_hours": 1000,
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 88.0,
@@ -115,7 +157,12 @@
         "course_page": "https://www.latrobe.edu.au/courses/master-of-occupational-therapy-practice",
         "course_handbook": "https://handbook.latrobe.edu.au/courses/2026/hmoth",
         "retrieved": "2026-06-10",
-        "verified_by": "study-abroad-planner v0.3.0 — re-verified campus (Bundoora not Bendigo) + PTE 65 each"
+        "verified_by": "study-abroad-planner v0.3.0 — re-verified campus (Bundoora not Bendigo) + PTE 65 each",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -128,7 +175,10 @@
       "regional": false,
       "regional_note": "Peninsula is in Melbourne metro, NOT regional. No 491 bonus.",
       "duration_years": 2,
-      "intake_months": [2, 7],
+      "intake_months": [
+        2,
+        7
+      ],
       "tuition_aud_per_year": 58300,
       "tuition_total_aud_2y": 116600,
       "pte_overall_min": 65,
@@ -136,14 +186,22 @@
       "ielts_overall_min": 7.0,
       "ielts_each_band_min": 7.0,
       "gpa_min_7scale": 5.0,
-      "prereq": ["Bachelor degree in any discipline", "Coursework + 1000h placement"],
+      "prereq": [
+        "Bachelor degree in any discipline",
+        "Coursework + 1000h placement"
+      ],
       "scholarship_max_pct": 0,
       "qilt_employment_ft_pct": null,
       "url": "https://www.monash.edu/study/courses/find-a-course/occupational-therapy-practice-m6015",
       "source": {
         "course_page": "https://www.studymelbourne.vic.gov.au/courses-in-australia/master-of-occupational-therapy-practice",
         "retrieved": "2026-06-10",
-        "verified_by": "study-abroad-planner v0.3.0 — NEW SCHOOL ADDED (was missing from v0.2.1)"
+        "verified_by": "study-abroad-planner v0.3.0 — NEW SCHOOL ADDED (was missing from v0.2.1)",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -156,7 +214,9 @@
       "regional": true,
       "region_type": "TAS (Category 2)",
       "duration_years": 2,
-      "intake_months": [7],
+      "intake_months": [
+        7
+      ],
       "tuition_aud_per_year": 50687,
       "tuition_total_aud_2y": 101374,
       "pte_overall_min": 65,
@@ -164,7 +224,11 @@
       "ielts_overall_min": 7.0,
       "ielts_each_band_min": 7.0,
       "gpa_min_7scale": 5.0,
-      "prereq": ["2 units human anatomy + physiology (within last 10 yrs)", "1 unit social perspectives in health (psychology/sociology)", "1 unit research methods / evidence-based practice"],
+      "prereq": [
+        "2 units human anatomy + physiology (within last 10 yrs)",
+        "1 unit social perspectives in health (psychology/sociology)",
+        "1 unit research methods / evidence-based practice"
+      ],
       "placement_required": "1000+ hours",
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 89.0,
@@ -173,7 +237,12 @@
       "source": {
         "course_page": "https://www.utas.edu.au/courses/chm/courses/m7d-master-of-occupational-therapy",
         "retrieved": "2026-06-10",
-        "verified_by": "study-abroad-planner v0.3.0 — English verified (PTE Academic 65 each ACCEPTED, contradicts v0.2.1 verify_flag)"
+        "verified_by": "study-abroad-planner v0.3.0 — English verified (PTE Academic 65 each ACCEPTED, contradicts v0.2.1 verify_flag)",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -186,13 +255,17 @@
       "regional": false,
       "regional_note": "Bedford Park is in Adelaide (non-regional). Flinders also offers regional placement options in NT/Renmark/Port Pirie/Mt Gambier but these don't confer regional status for the 2y master.",
       "duration_years": 2,
-      "intake_months": [3],
+      "intake_months": [
+        3
+      ],
       "tuition_aud_per_year": 49700,
       "tuition_total_aud_2y": 99400,
       "pte_overall_min": 65,
       "pte_each_band_min": 65,
       "gpa_min_7scale": 5.0,
-      "prereq": ["Bachelor of Health Sciences (or equivalent) + 1 unit psychology"],
+      "prereq": [
+        "Bachelor of Health Sciences (or equivalent) + 1 unit psychology"
+      ],
       "ielts_required": "IELTS 7.0 overall, 6.5 each band (NOT PTE — verify)",
       "scholarship_max_pct": 20,
       "qilt_employment_ft_pct": 92.0,
@@ -202,7 +275,12 @@
         "course_page": "https://www.flinders.edu.au/study/courses/postgraduate-occupational-therapy",
         "retrieved": "2026-06-09",
         "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with Flinders handbook",
-        "verify_flag": "IELTS 7.0/6.5 vs PTE — Flinders does not accept PTE for OT; re-verify policy"
+        "verify_flag": "IELTS 7.0/6.5 vs PTE — Flinders does not accept PTE for OT; re-verify policy",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -214,13 +292,18 @@
       "campus": "Adelaide SA",
       "regional": false,
       "duration_years": 2,
-      "intake_months": [2, 7],
+      "intake_months": [
+        2,
+        7
+      ],
       "tuition_aud_per_year": 42000,
       "tuition_total_aud_2y": 84000,
       "pte_overall_min": 65,
       "pte_each_band_min": 65,
       "gpa_min_7scale": 5.0,
-      "prereq": ["human anatomy and physiology (Level 1)"],
+      "prereq": [
+        "human anatomy and physiology (Level 1)"
+      ],
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 90.0,
       "regional_bonus_eoi": 0,
@@ -228,7 +311,12 @@
       "source": {
         "course_page": "https://www.unisa.edu.au/study",
         "retrieved": "2026-06-09",
-        "verified_by": "study-abroad-planner v0.2.1 data pull — UniSA course pages split between /study and /study/postgraduate; verify specific course page URL"
+        "verified_by": "study-abroad-planner v0.2.1 data pull — UniSA course pages split between /study and /study/postgraduate; verify specific course page URL",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -241,13 +329,17 @@
       "regional": true,
       "region_type": "QLD regional (Category 2)",
       "duration_years": 4,
-      "intake_months": [2],
+      "intake_months": [
+        2
+      ],
       "tuition_aud_per_year": 38940,
       "tuition_total_aud_4y": 155760,
       "pte_overall_min": 65,
       "pte_each_band_min": 65,
       "gpa_min_7scale": 5.0,
-      "prereq": ["Year 12 English + science recommended"],
+      "prereq": [
+        "Year 12 English + science recommended"
+      ],
       "note": "4-year bachelor — not needed if you already have a bachelor. But if you wanted a QLD option with regional bonus, CQU is the cheapest 4y path.",
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 87.0,
@@ -256,7 +348,12 @@
       "source": {
         "course_page": "https://www.cqu.edu.au/courses/699656/bachelor-of-occupational-therapy-honours",
         "retrieved": "2026-06-09",
-        "verified_by": "study-abroad-planner v0.2.1 data pull — CQU handbook"
+        "verified_by": "study-abroad-planner v0.2.1 data pull — CQU handbook",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -268,7 +365,10 @@
       "campus": "Melbourne VIC",
       "regional": false,
       "duration_years": 2,
-      "intake_months": [2, 7],
+      "intake_months": [
+        2,
+        7
+      ],
       "tuition_aud_per_year": 56000,
       "tuition_total_aud_2y": 112000,
       "pte_overall_min": 79,
@@ -283,7 +383,12 @@
         "course_page": "https://study.unimelb.edu.au",
         "retrieved": "2026-06-09",
         "verified_by": "study-abroad-planner v0.2.1 data pull — UniMelb handbook",
-        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification"
+        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     },
     {
@@ -295,7 +400,9 @@
       "campus": "Sydney NSW",
       "regional": false,
       "duration_years": 2,
-      "intake_months": [2],
+      "intake_months": [
+        2
+      ],
       "tuition_aud_per_year": 58000,
       "tuition_total_aud_2y": 116000,
       "pte_overall_min": 79,
@@ -310,7 +417,12 @@
         "course_page": "https://www.sydney.edu.au",
         "retrieved": "2026-06-09",
         "verified_by": "study-abroad-planner v0.2.1 data pull — USyd handbook",
-        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification"
+        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification",
+        "data_type": [
+          "course_facts",
+          "english_standard",
+          "tuition_fee"
+        ]
       }
     }
   ],
@@ -318,7 +430,12 @@
     "OT": {
       "2y_master_options_count": 5,
       "1st_choice": "CDU (NT, 2y, no prereq, $69K, regional)",
-      "backups": ["La Trobe Bundoora (VIC, 2y, needs bridging, $89K, NOT regional)", "UTAS (TAS, 2y, needs bridging, $101K, regional)", "Flinders (SA, 2y, non-regional, $99K)", "UniSA (SA, 2y, non-regional, $84K)"],
+      "backups": [
+        "La Trobe Bundoora (VIC, 2y, needs bridging, $89K, NOT regional)",
+        "UTAS (TAS, 2y, needs bridging, $101K, regional)",
+        "Flinders (SA, 2y, non-regional, $99K)",
+        "UniSA (SA, 2y, non-regional, $84K)"
+      ],
       "applicant_filter_notes": {
         "without_bridging": "1 (CDU — no prereq)",
         "with_bridging": "4 (La Trobe / UTAS / Flinders / UniSA — need prereq units)",
