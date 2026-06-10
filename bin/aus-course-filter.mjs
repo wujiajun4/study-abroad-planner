@@ -7,20 +7,20 @@
  * 用法：
  *   # argv 模式
  *   node aus-course-filter.mjs \
- *     --pte 66 --pte-each-band 58 --budget-aud 110000 \
+ *     --pte 70 --pte-each-band 65 --budget-aud 110000 \
  *     --regional-only --profession OT --no-prereq
  *
  *   # stdin 模式
- *   echo "pte=66
+ *   echo "pte=70
  *   budget_aud=110000
  *   regional_only=yes
  *   profession=OT
  *   no_prereq=yes" | node aus-course-filter.mjs
  *
  *   # JSON 输出
- *   node aus-course-filter.mjs --json --pte 66 ...
+ *   node aus-course-filter.mjs --json --pte 70 ...
  *
- * 数据源：data/australian-courses.json (v0.2.0)
+ * 数据源：data/australian-courses.json (v0.3.0) — 每条 course 都带 source 字段
  */
 
 import fs from 'node:fs';
@@ -52,6 +52,7 @@ function parseInput(args) {
     intake_month: null,
     sort_by: 'tuition_total',  // 'tuition_total' | 'qilt_employment_ft_pct' | 'scholarship_max_pct' | 'gpa_min_7scale'
     ascending: true,
+    show_source: false,        // v0.2.1+ — print per-course `source` block (URL + retrieved date)
     json: false,
   };
 
@@ -70,6 +71,7 @@ function parseInput(args) {
     if (args[i] === '--intake-month') { opts.intake_month = parseInt(args[++i], 10); continue; }
     if (args[i] === '--sort-by') { opts.sort_by = args[++i]; continue; }
     if (args[i] === '--desc') { opts.ascending = false; continue; }
+    if (args[i] === '--show-source') { opts.show_source = true; continue; }
   }
 
   // stdin (only fills missing fields, doesn't overwrite argv)
@@ -82,7 +84,7 @@ function parseInput(args) {
           const [, key, val] = m;
           if (['pte', 'pte_each_band', 'budget_aud', 'gpa', 'scholarship_min_pct', 'intake_month'].includes(key)) {
             if (opts[key] === null || opts[key] === 0) opts[key] = parseFloat(val);
-          } else if (['regional_only', 'no_prereq', 'json'].includes(key)) {
+          } else if (['regional_only', 'no_prereq', 'json', 'show_source'].includes(key)) {
             if (!opts[key]) opts[key] = (val === 'yes' || val === 'true');
           } else {
             if (!opts[key]) opts[key] = val;
@@ -187,6 +189,11 @@ function main() {
         course: `${r.course.school} ${r.course.course}`,
         reason: r.why,
       })),
+      data_source: {
+        schema_version: data.version,
+        last_updated: data.last_updated,
+        schema_note: data.schema_note,
+      },
     }, null, 2));
   } else {
     console.log('');
@@ -237,6 +244,16 @@ function main() {
           console.log(`         Prereq match (you): ${c.prereq_match_user}`);
         }
         console.log(`         → ${c.url}`);
+        if (opts.show_source && c.source) {
+          console.log(`         📚 Source: ${c.source.course_page}`);
+          console.log(`             Retrieved: ${c.source.retrieved}`);
+          if (c.source.verified_by) {
+            console.log(`             Verified: ${c.source.verified_by}`);
+          }
+          if (c.source.verify_flag) {
+            console.log(`             ⚠️  Verify: ${c.source.verify_flag}`);
+          }
+        }
         console.log('');
       }
     }

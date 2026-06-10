@@ -1,0 +1,304 @@
+{
+  "$schema": "study-abroad-planner v0.3.0 7-school OT PR pathway comparison",
+  "version": "0.3.0",
+  "last_updated": "2026-06-10",
+  "schools_compared": 7,
+  "schema_note": "Compares PR pathway structural advantages across 7 Australian OT schools. The actual 'PR grant rate' by school is NOT publicly tracked — AHPRA does not publish school-of-graduation, and universities don't publish PR grant rates. This analysis uses PROXY signals: (1) QILT full-time employment rate, (2) regional location for 491 bonus, (3) state nomination availability, (4) AHPRA workforce density by state. Best-effort estimates with explicit confidence levels. Treat as directional, not exact.",
+  "schools": [
+    {
+      "rank_pr_pathway": 1,
+      "school": "CDU",
+      "course": "Master of Occupational Therapy",
+      "campus": "Darwin NT",
+      "regional": true,
+      "duration_years": 2,
+      "tuition_aud_per_year": 34736,
+      "tuition_total_2y": 69472,
+      "qilt_ft_employment_pct": 96.4,
+      "state_workforce_total_ot": 256,
+      "state_total_ot_per_100k_pop": 73.5,
+      "eoi_bonus_491_regional": 5,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "★★ 实际标准: NT 2025-26 配额已用完 + NT Graduate Stream 路径需 2y CDU 居住 + 6 月 485 visa 期居住 + 工作努力证明 + 3y 居住承诺(来源: australiasnorthernterritory.com.au 2026-01-26 更新). '池子小=易担保'是代理信号,真实门槛已严格.",
+      "state_nomination_491_difficulty": "★★ 实际标准: 同 NT Graduate Stream (2y CDU 居住) + 6 月 491 居住承诺(短于 190). 491 路径略宽松(政府报告 26/11/2025 NTOMOL 包含 252411 OT).",
+      "v0_3_0_real_world_constraint": "★★ NT 2025-26 提名门户已于 2026-01-26 关闭 (配额用完). 新申请只接受 NT Graduate / NT Resident 流. CDU 优势 = NT Graduate Stream 资格, 不是 '小池子'.",
+      "practical_supervision_after_grad": "Low — strong NT job market, willing employers",
+      "estimated_pr_conversion_5yr_tier": "高",
+      "estimated_pr_conversion_confidence": "medium",
+      "estimated_pr_conversion_basis": "偏远 + NT 最小 OT 池子(256) + 96.4% QILT FT 就业 + 最低学费($34,736/yr) + CDU OT 27 Oct 2025 后直接走 Pathway A 简化注册. 注: 真实 PR grant-by-school 数据不公开, 此为结构性 best-effort.",
+      "key_advantages": [
+        "Highest QILT FT employment (96.4%) — best graduate outcome signal",
+        "★ NT Graduate Stream eligibility: 2y CDU 居住 + 6 月 485 居住 + 工作努力证明 = NT 190/491 提名核心路径 (2026-01-26 NT 配额已用完, 但 CDU 毕业生走 Graduate Stream 仍可申请)",
+        "Lowest tuition ($34,736/yr)",
+        "30% Global Merit scholarship possible",
+        "Pathway A streamlined (post 27 Oct 2025) — 3-6 months to General Registration",
+        "No PTE/English upgrade needed (65/58 entry sufficient)"
+      ],
+      "key_disadvantages": [
+        "Darwin is geographically remote (low lifestyle amenities)",
+        "Smaller university brand recognition vs Group of 8",
+        "Limited peer network in Darwin OT community"
+      ]
+    },
+    {
+      "rank_pr_pathway": 2,
+      "school": "UTAS",
+      "course": "Master of Occupational Therapy",
+      "campus": "Launceston TAS",
+      "regional": true,
+      "duration_years": 2,
+      "tuition_aud_per_year": 50687,
+      "tuition_total_2y": 101374,
+      "qilt_ft_employment_pct": 89.0,
+      "state_workforce_total_ot": 447,
+      "state_total_ot_per_100k_pop": 73.5,
+      "eoi_bonus_491_regional": 5,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Low — Tasmania actively nominates health professionals",
+      "state_nomination_491_difficulty": "Low — Tasmania 491 well-established",
+      "practical_supervision_after_grad": "Medium — TAS OT market smaller, but growing",
+      "estimated_pr_conversion_5yr_tier": "中-高",
+      "estimated_pr_conversion_confidence": "medium",
+      "estimated_pr_conversion_basis": "Regional + TAS 491 path mature + 89.0% QILT FT employment. Constraint: PTE 65 each entry requirement excludes applicants who only meet the lower AHPRA ELS bar of 65/58. TAS state nomination real criteria pending tier_2 verification. Note: real grant-by-school data is not publicly published.",
+      "key_advantages": [
+        "Tasmania 491 is a well-trodden PR path (5+ points regional bonus)",
+        "PTE 65 each required — applicants with only the lower AHPRA ELS 65/58 bar need an upgrade",
+        "TAS state government actively recruits OTs for regional health services"
+      ],
+      "key_disadvantages": [
+        "Higher tuition ($50,687/yr)",
+        "PTE each 65 entry requirement (user has 58)",
+        "IELTS only — no PTE accepted (verify)",
+        "Smaller OT workforce in TAS (447 total)"
+      ]
+    },
+    {
+      "rank_pr_pathway": 3,
+      "school": "La Trobe University",
+      "course": "Master of Occupational Therapy Practice",
+      "campus": "Bendigo VIC",
+      "regional": true,
+      "duration_years": 2,
+      "tuition_aud_per_year": 44500,
+      "tuition_total_2y": 89000,
+      "qilt_ft_employment_pct": 88.0,
+      "state_workforce_total_ot": 8809,
+      "state_total_ot_per_100k_pop": 137.2,
+      "eoi_bonus_491_regional": 5,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Medium — VIC 190 competitive (high state demand)",
+      "state_nomination_491_difficulty": "Medium — Bendigo classified as regional",
+      "practical_supervision_after_grad": "High — large VIC OT market",
+      "estimated_pr_conversion_5yr_tier": "中-高",
+      "estimated_pr_conversion_confidence": "medium",
+      "estimated_pr_conversion_basis": "偏远(VIC Bendigo) + 88.0% QILT FT 就业 + VIC 大市场 8,809 OT. 局限: PTE each 65 门槛 + VIC 190 竞争激烈(墨尔本). 注: 真实 grant-by-school 数据不公开.",
+      "key_advantages": [
+        "VIC regional bonus (Bendigo classified regional for 491)",
+        "PTE 65 each required (user has 58 — needs upgrade)",
+        "Strong alumni network in VIC",
+        "Lower tuition than UTAS"
+      ],
+      "key_disadvantages": [
+        "PTE each 65 entry requirement",
+        "VIC OT market is large (8,809) — more competition for state nomination",
+        "No QILT data showing higher than 88% FT employment"
+      ]
+    },
+    {
+      "rank_pr_pathway": 4,
+      "school": "Flinders University",
+      "course": "Master of Occupational Therapy",
+      "campus": "Bedford Park SA",
+      "regional": false,
+      "duration_years": 2,
+      "tuition_aud_per_year": 49700,
+      "tuition_total_2y": 99400,
+      "qilt_ft_employment_pct": 92.0,
+      "state_workforce_total_ot": 2710,
+      "state_total_ot_per_100k_pop": 123.8,
+      "eoi_bonus_491_regional": 0,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Medium — SA 190 competitive but active",
+      "state_nomination_491_difficulty": "N/A — Adelaide not regional",
+      "practical_supervision_after_grad": "High — strong SA OT market",
+      "estimated_pr_conversion_5yr_tier": "中",
+      "estimated_pr_conversion_confidence": "medium",
+      "estimated_pr_conversion_basis": "SA 190 可行 + 92.0% QILT FT 就业. 局限: ❌ Adelaide 非偏远(无 491 加分) + IELTS 7.0/6.5(不接 PTE). 注: 真实 grant-by-school 数据不公开.",
+      "key_advantages": [
+        "Strong FT employment (92%)",
+        "SA 190 nomination possible",
+        "Ielts 7.0/6.5 (NOT PTE — verify)"
+      ],
+      "key_disadvantages": [
+        "Adelaide is NOT regional — no 491 bonus",
+        "Higher tuition ($49,700/yr)",
+        "IELTS only (not PTE) — user needs IELTS, not PTE",
+        "More expensive than CDU by $30K total"
+      ]
+    },
+    {
+      "rank_pr_pathway": 5,
+      "school": "University of South Australia",
+      "course": "Master of Occupational Therapy",
+      "campus": "Adelaide SA",
+      "regional": false,
+      "duration_years": 2,
+      "tuition_aud_per_year": 42000,
+      "tuition_total_2y": 84000,
+      "qilt_ft_employment_pct": 90.0,
+      "state_workforce_total_ot": 2710,
+      "state_total_ot_per_100k_pop": 123.8,
+      "eoi_bonus_491_regional": 0,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Medium — SA 190 active",
+      "state_nomination_491_difficulty": "N/A — Adelaide not regional",
+      "practical_supervision_after_grad": "High — strong SA OT market",
+      "estimated_pr_conversion_5yr_tier": "中",
+      "estimated_pr_conversion_confidence": "low-medium",
+      "estimated_pr_conversion_basis": "学费比 Flinders 便宜($42K vs $49.7K) + 90.0% QILT FT 就业 + SA 190. 局限: ❌ Adelaide 非偏远 + PTE each 65 门槛 + 与 Flinders 直接竞争 SA 池. 注: 真实 grant-by-school 数据不公开.",
+      "key_advantages": [
+        "Lower tuition than Flinders ($42K/yr vs $49.7K)",
+        "Strong FT employment (90%)",
+        "SA 190 nomination possible",
+        "Lower cost than UTAS"
+      ],
+      "key_disadvantages": [
+        "Adelaide NOT regional",
+        "PTE 65 each required (user has 58)",
+        "Same SA pool as Flinders — direct competition"
+      ]
+    },
+    {
+      "rank_pr_pathway": 6,
+      "school": "University of Melbourne",
+      "course": "Master of Occupational Therapy Practice",
+      "campus": "Melbourne VIC",
+      "regional": false,
+      "duration_years": 2,
+      "tuition_aud_per_year": 56000,
+      "tuition_total_2y": 112000,
+      "qilt_ft_employment_pct": 92.0,
+      "state_workforce_total_ot": 8809,
+      "state_total_ot_per_100k_pop": 137.2,
+      "eoi_bonus_491_regional": 0,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Hard — VIC 190 very competitive",
+      "state_nomination_491_difficulty": "N/A — Melbourne not regional",
+      "practical_supervision_after_grad": "Very high — best VIC job market",
+      "estimated_pr_conversion_5yr_tier": "中-低",
+      "estimated_pr_conversion_confidence": "low",
+      "estimated_pr_conversion_basis": "Top brand + 92.0% QILT + large VIC market. Constraint: ❌❌ PTE 79 each entry requirement is well above the AHPRA ELS bar — most applicants are excluded. Plus highest tuition ($56K) + Melbourne not regional + VIC 190 extremely competitive. Note: real grant-by-school data is not publicly published.",
+      "key_advantages": [
+        "Highest university brand (Group of 8)",
+        "Best VIC job market (8,809 OTs)",
+        "Strong FT employment (92%)"
+      ],
+      "key_disadvantages": [
+        "❌ PTE 79 each required (user has 58 — major gap)",
+        "Highest tuition ($56K/yr)",
+        "Melbourne NOT regional",
+        "VIC 190 extremely competitive",
+        "Worst PR conversion: $112K for likely 189-only path"
+      ]
+    },
+    {
+      "rank_pr_pathway": 7,
+      "school": "University of Sydney",
+      "course": "Master of Occupational Therapy",
+      "campus": "Sydney NSW",
+      "regional": false,
+      "duration_years": 2,
+      "tuition_aud_per_year": 58000,
+      "tuition_total_2y": 116000,
+      "qilt_ft_employment_pct": 89.0,
+      "state_workforce_total_ot": 9154,
+      "state_total_ot_per_100k_pop": 109.5,
+      "eoi_bonus_491_regional": 0,
+      "eoi_bonus_aus_study_2y": 5,
+      "state_nomination_190_difficulty": "Very hard — NSW 190 capped, extremely competitive",
+      "state_nomination_491_difficulty": "N/A — Sydney not regional",
+      "practical_supervision_after_grad": "Very high — largest OT market (9,154)",
+      "estimated_pr_conversion_5yr_tier": "低",
+      "estimated_pr_conversion_confidence": "low",
+      "estimated_pr_conversion_basis": "Top brand + 9,154 OTs (largest pool). Constraint: ❌❌ PTE 79 each entry requirement is well above the AHPRA ELS bar — most applicants are excluded. Plus highest tuition ($58K) + Sydney not regional + NSW 190 extremely competitive and capped. Note: real grant-by-school data is not publicly published.",
+      "key_advantages": [
+        "Highest university brand (Group of 8)",
+        "Largest OT market in Australia (9,154)",
+        "Sydney lifestyle amenities"
+      ],
+      "key_disadvantages": [
+        "❌ PTE 79 each required (user has 58 — major gap)",
+        "Highest tuition ($58K/yr)",
+        "Sydney NOT regional",
+        "NSW 190 extremely competitive + capped",
+        "Worst PR conversion: $116K for uncertain outcome"
+      ]
+    }
+  ],
+  "methodology_note_v0_3_0": "v0.3.0: 'estimated_pr_conversion_5yr_pct' (precise %) replaced with 'estimated_pr_conversion_5yr_tier' (高/中/低) + 'estimated_pr_conversion_confidence' + 'estimated_pr_conversion_basis' (signals used). This removes false precision — AHPRA does not publish PR grant-by-school, so 85% would be fabricated. The underlying signals remain: (1) QILT FT employment; (2) regional bonus eligibility; (3) state nomination availability; (4) AHPRA workforce density by state. tier is best-effort directional and MUST be cross-verified with current data (use source-validator.mjs). Major decisions (school choice) should also verify state nomination criteria at tier_2 (state government pages), not rely solely on these tier signals.",
+  "headline_ranking_summary": {
+    "best_pr_pathway": "CDU (Darwin NT) — strongest structural advantage",
+    "best_pr_pathway_2": "UTAS (Launceston TAS) — established 491 path",
+    "best_pr_pathway_3": "La Trobe Bendigo — regional VIC",
+    "avoid_for_pr": "UniMelb / USyd — PTE 79 barrier + no regional + highest cost",
+    "key_insight": "Regional schools give +5-10 EOI points over metro schools. In OT (75-80 cutoff), +5 points = likely vs borderline. The 30-50% cost savings of regional schools further compounds."
+  },
+  "data_sources": [
+    {
+      "name": "AHPRA Occupational Therapy Statistics 2024-25",
+      "url": "https://www.occupationaltherapyboard.gov.au/About/Statistics.aspx",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "Workforce by state (Table 1.1)"
+    },
+    {
+      "name": "AHPRA OT Registrant Data Q1 2025",
+      "url": "https://www.ahpra.gov.au/documents/default.aspx?chksum=WkGyylVkimmjpDbRhNWLFQ%3D%3D&dbid=AP&record=WD25%2F34758",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "Total registrants 34,143 (March 2025)"
+    },
+    {
+      "name": "AHPRA Annual Report 2022/23",
+      "url": "https://www.parliament.nsw.gov.au/tp/files/187253/AHPRA%20Annual%20Report%202022_2023.pdf",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "109 OTs per 100,000 head of population"
+    },
+    {
+      "name": "DoH Workforce Data — Allied Health",
+      "url": "https://hwd.health.gov.au/resources/data/summary-state.html",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "OTs per 100k by state (NT 73.5, TAS 73.5, VIC 137.2, SA 123.8, WA 109.5, NSW 93.7, QLD 109.0, ACT 93.8)"
+    },
+    {
+      "name": "QILT Course & Employment Outcomes",
+      "url": "https://www.qilt.edu.au/",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "FT employment % per course"
+    },
+    {
+      "name": "DHA FOI 252411 visa grants 2016-2020",
+      "url": "https://www.homeaffairs.gov.au/foi/files/2020/fa-200601205-document-released.pdf",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "189 = 239 OTs granted, 190 = 109 OTs granted (2016-2020 cumulative)"
+    },
+    {
+      "name": "Skills Priority List 2025",
+      "url": "https://www.jobsandskills.gov.au/data/skills-priority-list",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09",
+      "use": "OT in shortage in all 8 states/territories"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "$schema": "study-abroad-planner v0.3.0 CDU OT fieldwork & compliance",
+  "version": "0.3.0",
+  "last_updated": "2026-06-10",
+  "school": "CDU",
+  "course": "Master of Occupational Therapy (SOCTH2 / SOCTH1)",
+  "source_url": "https://www.cdu.edu.au/study/course/master-occupational-therapy-socth2",
+  "source_url_secondary": "https://www.cdu.edu.au/health/student-experience/placements-work-integrated-learning",
+  "source_tier": "tier_1",
+  "retrieved": "2026-06-10",
+  "verified_by": "study-abroad-planner v0.3.0 fieldwork analysis",
+
+  "practice_education_hours": {
+    "total_mandated": 1000,
+    "rationale": "World Federation of Occupational Therapists (WFOT) mandate + Australian Minimum Competency Standards for New Graduate Occupational Therapists (OTBA 2018)",
+    "structure_year_1": {
+      "year": 1,
+      "placement_type": "project placement",
+      "hours_per_week": 10,
+      "weeks": 12,
+      "total_hours": 120,
+      "when": "Semester 2"
+    },
+    "structure_year_2": {
+      "year": 2,
+      "placement_1_type": "clinical placement",
+      "placement_1_hours_per_week": 30,
+      "placement_1_weeks": 12,
+      "placement_1_total_hours": 360,
+      "placement_1_when": "Semester 1",
+      "placement_2_type": "capstone placement",
+      "placement_2_hours_per_week": 38,
+      "placement_2_weeks": 12,
+      "placement_2_total_hours": 456,
+      "placement_2_when": "Semester 2"
+    },
+    "year_2_total": 816,
+    "matches_mandate": "120 + 816 = 936, likely + simulation block hours to reach 1000",
+    "simulation_block_required": true,
+    "simulation_block_hours": "30 hours on-campus per relevant unit (24 hours for OCC311/OCC512/OCC513)"
+  },
+
+  "pre_placement_compliance_requirements": {
+    "mandatory": [
+      {
+        "requirement": "National Police Check",
+        "cost_aud": 20,
+        "validity": "1 year from issue",
+        "note": "If not cleared, cannot undertake placements and will not meet course requirements"
+      },
+      {
+        "requirement": "Working with Children Check (WWCC / Ochre Card in NT)",
+        "note": "Apply in your state/territory where you will be undertaking placement"
+      },
+      {
+        "requirement": "Immunisation Schedule (current)",
+        "note": "Required before practical placements. Includes COVID-19 (subject to state/territory guidelines). Provide proof of exemption from medical doctor if applicable."
+      },
+      {
+        "requirement": "Senior First Aid qualification",
+        "note": "Annual requirement"
+      },
+      {
+        "requirement": "NDIS Worker Screening Check",
+        "note": "Some host organisations require this. May be additional to WWCC."
+      },
+      {
+        "requirement": "Online preparatory training",
+        "examples": "Equal Opportunity Training + COVID-19 Infection Control Training"
+      }
+    ],
+    "estimated_total_compliance_cost_aud": "300-500 (police check + WWCC + immunisations + first aid + NDIS screening if needed)"
+  },
+
+  "placement_geo_constraints": {
+    "rural_remote_placement_required": true,
+    "duration": "5-8 weeks in regional or remote location",
+    "self_funded": true,
+    "funding_options": [
+      "CDU Scholarship (Faculty of Health Placements Central)",
+      "First Nations students: 'away from base' funding via CDU if eligible"
+    ],
+    "on_campus_intensives_in_darwin": {
+      "frequency": "Once per semester for final two years",
+      "self_funded": true
+    }
+  },
+
+  "ahpra_student_registration": {
+    "automatic": true,
+    "mechanism": "CDU Faculty of Health registers all OT students with AHPRA under National Law",
+    "student_action_required": "None — automatic upon enrolment in OT program"
+  },
+
+  "key_risks_for_user": [
+    "1000 practice hours is mandatory — refusal of placement offer may jeopardise course completion (per CDU handbook)",
+    "5-8 week rural/remote rotation is mandatory — must self-fund travel + accommodation",
+    "Police check / WWCC / immunisations must be valid AT TIME of each placement block (renewed annually for police)",
+    "NDIS Worker Screening may be required depending on host organisation — verify in advance",
+    "AHPRA student registration is automatic but students must comply with legislative requirements under National Law"
+  ],
+
+  "cost_estimate_total": {
+    "compliance_setup_first_year_aud": "300-500",
+    "rural_placement_travel_estimate_aud": "1500-3000 (NT internal relocation + accommodation for 5-8 weeks)",
+    "annual_renewal_aud": "100-200 (police check renewal + any updated immunisations)"
+  },
+
+  "user_specific_implications": {
+    "before_applying": [
+      "★ Confirm current immunisation status (especially COVID) — gaps will need filling",
+      "★ Get police check early (3-4 weeks processing in some states)",
+      "★ Check NT Ochre Card (WWCC) requirements before arriving in Darwin",
+      "Budget ~$2,000-3,500 AUD for compliance + 1 rural placement over 2 years"
+    ],
+    "during_study": [
+      "Cannot defer immunisations / police check / WWCC — they must be valid for each placement block",
+      "If placement offer is refused, may delay graduation by 6-12 months (per CDU handbook)"
+    ]
+  }
+}

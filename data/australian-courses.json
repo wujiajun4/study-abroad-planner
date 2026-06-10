@@ -1,12 +1,12 @@
 {
-  "$schema": "study-abroad-planner v0.2.0 course data schema",
-  "version": "0.2.0",
-  "last_updated": "2026-06-09",
-  "schema_note": "Each entry is a CRICOS-registered Australian health-profession course. Tuition is for 2026 (indicative). Verify each field against the university's own page before recommending — see references/data-sources.md.",
+  "$schema": "study-abroad-planner v0.3.0 course data schema",
+  "version": "0.3.0",
+  "last_updated": "2026-06-10",
+  "schema_note": "Each entry is a CRICOS-registered Australian health-profession course. Tuition is for 2026 (indicative). Verify each field against the university's own page before recommending — see references/data-sources.md. Every course carries a `source` object recording the exact URL retrieved, retrieval date, and verification status. v0.3.0 changes: (1) 11 courses (Monash added); (2) La Trobe Bendigo → Bundoora corrected; (3) English requirements (IELTS) added as separate fields; (4) PTE test type verified (PTE Academic).",
   "filterable_fields": [
     "school", "course", "anzsco", "profession", "tuition_aud_per_year",
     "duration_years", "pte_overall_min", "pte_each_band_min", "gpa_min_7scale",
-    "regional", "scholarship_max_pct", "intake_months", "prereq", "url"
+    "regional", "scholarship_max_pct", "intake_months", "prereq", "url", "source"
   ],
   "courses": [
     {
@@ -30,7 +30,12 @@
       "scholarship_max_pct": 30,
       "scholarship_name": "CDU Global Merit Scholarship",
       "qilt_employment_ft_pct": 96.4,
-      "url": "https://www.cdu.edu.au/study/course/master-occupational-therapy-socth2"
+      "url": "https://www.cdu.edu.au/study/course/master-occupational-therapy-socth2",
+      "source": {
+        "course_page": "https://www.cdu.edu.au/study/course/master-occupational-therapy-socth2",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CRICOS + CDU handbook"
+      }
     },
     {
       "school": "CDU",
@@ -49,10 +54,14 @@
       "pte_each_band_min": 58,
       "gpa_min_7scale": 5.0,
       "prereq": ["health-related bachelor (incl. biomedical science, science, health sciences, nutrition, food science, exercise science)"],
-      "prereq_match_user": "运动训练本科 (含 exercise science) → likely matches",
       "scholarship_max_pct": 30,
       "qilt_employment_ft_pct": 91.0,
-      "url": "https://www.cdu.edu.au/study/course/master-dietetics-sdiet1"
+      "url": "https://www.cdu.edu.au/study/course/master-dietetics-sdiet1",
+      "source": {
+        "course_page": "https://www.cdu.edu.au/study/course/master-dietetics-sdiet1",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook"
+      }
     },
     {
       "school": "CDU",
@@ -72,30 +81,70 @@
       "prereq": [],
       "scholarship_max_pct": 25,
       "note": "4-year double degree — not needed if you already have a bachelor",
-      "url": "https://www.cdu.edu.au/study/course/bachelor-health-sciencemaster-occupational-therapy-hhsot3"
+      "url": "https://www.cdu.edu.au/study/course/bachelor-health-sciencemaster-occupational-therapy-hhsot3",
+      "source": {
+        "course_page": "https://www.cdu.edu.au/study/course/bachelor-health-sciencemaster-occupational-therapy-hhsot3",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with CDU handbook"
+      }
     },
     {
       "school": "La Trobe University",
       "course": "Master of Occupational Therapy Practice",
-      "course_code": "HMOTP",
+      "course_code": "HMOTH",
       "anzsco": "252711",
       "profession": "OT",
-      "campus": "Bendigo VIC",
-      "regional": true,
-      "region_type": "VIC regional (Category 2)",
+      "campus": "Melbourne (Bundoora) VIC — NOT Bendigo (corrected v0.3.0)",
+      "campus_correction_v0_3_0": "v0.2.1 said 'Bendigo' but official 2026 handbook (https://handbook.latrobe.edu.au/courses/2026/hmoth) shows MOT is at Bundoora (Melbourne metro). Bendigo may have other health courses but NOT MOT. CRITICAL: Bundoora is NOT regional → no 491 bonus for this course.",
+      "regional": false,
       "duration_years": 2,
-      "intake_months": [2, 7],
+      "intake_months": [3, 7],
       "tuition_aud_per_year": 44500,
       "tuition_total_aud_2y": 89000,
       "pte_overall_min": 65,
       "pte_each_band_min": 65,
+      "ielts_overall_min": 7.0,
+      "ielts_each_band_min": 7.0,
       "gpa_min_7scale": 5.0,
-      "prereq": ["human anatomy and physiology (Level 1, 1 semester each)"],
-      "prereq_match_user": "运动训练本科 → likely needs 1 yr bridging for anatomy/physio",
+      "prereq": ["Bachelor degree in any discipline", "WAM 65% minimum", "Recommended background: Health/education/social/psychological/biological sciences"],
+      "placement_hours": 1000,
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 88.0,
-      "regional_bonus_eoi": 5,
-      "url": "https://www.latrobe.edu.au/courses/occupational-therapy"
+      "url": "https://www.latrobe.edu.au/courses/master-of-occupational-therapy-practice",
+      "source": {
+        "course_page": "https://www.latrobe.edu.au/courses/master-of-occupational-therapy-practice",
+        "course_handbook": "https://handbook.latrobe.edu.au/courses/2026/hmoth",
+        "retrieved": "2026-06-10",
+        "verified_by": "study-abroad-planner v0.3.0 — re-verified campus (Bundoora not Bendigo) + PTE 65 each"
+      }
+    },
+    {
+      "school": "Monash University",
+      "course": "Master of Occupational Therapy Practice",
+      "course_code": "079265M",
+      "anzsco": "252711",
+      "profession": "OT",
+      "campus": "Peninsula (Frankston) VIC",
+      "regional": false,
+      "regional_note": "Peninsula is in Melbourne metro, NOT regional. No 491 bonus.",
+      "duration_years": 2,
+      "intake_months": [2, 7],
+      "tuition_aud_per_year": 58300,
+      "tuition_total_aud_2y": 116600,
+      "pte_overall_min": 65,
+      "pte_each_band_min": 65,
+      "ielts_overall_min": 7.0,
+      "ielts_each_band_min": 7.0,
+      "gpa_min_7scale": 5.0,
+      "prereq": ["Bachelor degree in any discipline", "Coursework + 1000h placement"],
+      "scholarship_max_pct": 0,
+      "qilt_employment_ft_pct": null,
+      "url": "https://www.monash.edu/study/courses/find-a-course/occupational-therapy-practice-m6015",
+      "source": {
+        "course_page": "https://www.studymelbourne.vic.gov.au/courses-in-australia/master-of-occupational-therapy-practice",
+        "retrieved": "2026-06-10",
+        "verified_by": "study-abroad-planner v0.3.0 — NEW SCHOOL ADDED (was missing from v0.2.1)"
+      }
     },
     {
       "school": "University of Tasmania",
@@ -112,14 +161,20 @@
       "tuition_total_aud_2y": 101374,
       "pte_overall_min": 65,
       "pte_each_band_min": 65,
+      "ielts_overall_min": 7.0,
+      "ielts_each_band_min": 7.0,
       "gpa_min_7scale": 5.0,
       "prereq": ["2 units human anatomy + physiology (within last 10 yrs)", "1 unit social perspectives in health (psychology/sociology)", "1 unit research methods / evidence-based practice"],
-      "prereq_match_user": "运动训练本科 → likely needs 1 yr bridging (anatomy + research methods)",
-      "ielts_required": "IELTS 7.0 overall, 7.0 each band (NOT PTE — verify)",
+      "placement_required": "1000+ hours",
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 89.0,
       "regional_bonus_eoi": 5,
-      "url": "https://www.utas.edu.au/courses/chm/courses/m7d-master-of-occupational-therapy"
+      "url": "https://www.utas.edu.au/courses/chm/courses/m7d-master-of-occupational-therapy",
+      "source": {
+        "course_page": "https://www.utas.edu.au/courses/chm/courses/m7d-master-of-occupational-therapy",
+        "retrieved": "2026-06-10",
+        "verified_by": "study-abroad-planner v0.3.0 — English verified (PTE Academic 65 each ACCEPTED, contradicts v0.2.1 verify_flag)"
+      }
     },
     {
       "school": "Flinders University",
@@ -138,12 +193,17 @@
       "pte_each_band_min": 65,
       "gpa_min_7scale": 5.0,
       "prereq": ["Bachelor of Health Sciences (or equivalent) + 1 unit psychology"],
-      "prereq_match_user": "运动训练本科 → may need bridging for psychology",
       "ielts_required": "IELTS 7.0 overall, 6.5 each band (NOT PTE — verify)",
       "scholarship_max_pct": 20,
       "qilt_employment_ft_pct": 92.0,
       "regional_bonus_eoi": 0,
-      "url": "https://www.flinders.edu.au/study/courses/postgraduate-occupational-therapy"
+      "url": "https://www.flinders.edu.au/study/courses/postgraduate-occupational-therapy",
+      "source": {
+        "course_page": "https://www.flinders.edu.au/study/courses/postgraduate-occupational-therapy",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — cross-checked with Flinders handbook",
+        "verify_flag": "IELTS 7.0/6.5 vs PTE — Flinders does not accept PTE for OT; re-verify policy"
+      }
     },
     {
       "school": "University of South Australia",
@@ -161,11 +221,15 @@
       "pte_each_band_min": 65,
       "gpa_min_7scale": 5.0,
       "prereq": ["human anatomy and physiology (Level 1)"],
-      "prereq_match_user": "运动训练本科 → may need 1 yr bridging for anatomy/physio",
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 90.0,
       "regional_bonus_eoi": 0,
-      "url": "https://www.unisa.edu.au/study"
+      "url": "https://www.unisa.edu.au/study",
+      "source": {
+        "course_page": "https://www.unisa.edu.au/study",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — UniSA course pages split between /study and /study/postgraduate; verify specific course page URL"
+      }
     },
     {
       "school": "CQUniversity",
@@ -188,7 +252,12 @@
       "scholarship_max_pct": 25,
       "qilt_employment_ft_pct": 87.0,
       "regional_bonus_eoi": 5,
-      "url": "https://www.cqu.edu.au/courses/699656/bachelor-of-occupational-therapy-honours"
+      "url": "https://www.cqu.edu.au/courses/699656/bachelor-of-occupational-therapy-honours",
+      "source": {
+        "course_page": "https://www.cqu.edu.au/courses/699656/bachelor-of-occupational-therapy-honours",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — CQU handbook"
+      }
     },
     {
       "school": "University of Melbourne",
@@ -205,11 +274,17 @@
       "pte_overall_min": 79,
       "pte_each_band_min": 79,
       "gpa_min_7scale": 5.5,
-      "prereq_note": "User's PTE 66 (listening 58) does NOT meet 79 each band requirement. Ruled out.",
+      "prereq_note": "PTE 79 each band is the high English bar. Most applicants with 65 each (the AHPRA ELS bar) do NOT meet UniMelb's 79-each requirement.",
       "scholarship_max_pct": 0,
       "qilt_employment_ft_pct": 92.0,
       "regional_bonus_eoi": 0,
-      "url": "https://study.unimelb.edu.au"
+      "url": "https://study.unimelb.edu.au",
+      "source": {
+        "course_page": "https://study.unimelb.edu.au",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — UniMelb handbook",
+        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification"
+      }
     },
     {
       "school": "University of Sydney",
@@ -226,21 +301,30 @@
       "pte_overall_min": 79,
       "pte_each_band_min": 79,
       "gpa_min_7scale": 5.5,
-      "prereq_note": "User's PTE does NOT meet 79 each band. Ruled out.",
+      "prereq_note": "PTE 79 each band is the high English bar. Most applicants with 65 each (the AHPRA ELS bar) do NOT meet USyd's 79-each requirement.",
       "scholarship_max_pct": 0,
       "qilt_employment_ft_pct": 89.0,
       "regional_bonus_eoi": 0,
-      "url": "https://www.sydney.edu.au"
+      "url": "https://www.sydney.edu.au",
+      "source": {
+        "course_page": "https://www.sydney.edu.au",
+        "retrieved": "2026-06-09",
+        "verified_by": "study-abroad-planner v0.2.1 data pull — USyd handbook",
+        "verify_flag": "URL is generic landing page; specific OT course URL should be located for re-verification"
+      }
     }
   ],
   "summary_by_profession": {
     "OT": {
       "2y_master_options_count": 5,
       "1st_choice": "CDU (NT, 2y, no prereq, $69K, regional)",
-      "backups": ["La Trobe Bendigo (VIC, 2y, needs bridging, $89K)", "UTAS (TAS, 2y, needs bridging, $101K)", "Flinders (SA, 2y, non-regional, $99K)", "UniSA (SA, 2y, non-regional, $84K)"],
-      "user_eligible_without_bridging": 1,
-      "user_eligible_with_bridging": 4,
-      "user_ruled_out_pte": 2
+      "backups": ["La Trobe Bundoora (VIC, 2y, needs bridging, $89K, NOT regional)", "UTAS (TAS, 2y, needs bridging, $101K, regional)", "Flinders (SA, 2y, non-regional, $99K)", "UniSA (SA, 2y, non-regional, $84K)"],
+      "applicant_filter_notes": {
+        "without_bridging": "1 (CDU — no prereq)",
+        "with_bridging": "4 (La Trobe / UTAS / Flinders / UniSA — need prereq units)",
+        "high_pte_required": "2 (UniMelb / USyd — PTE 79 each, ruling out applicants who only meet AHPRA ELS 65 each)",
+        "out_of_data": "1 (CQU is 4-year bachelor, listed for completeness)"
+      }
     },
     "Dietitian": {
       "2y_master_options_count": 1,
@@ -249,9 +333,9 @@
     }
   },
   "trigger_conditions_for_adding_more_courses": [
-    "User mentions a state not in current data (e.g. WA Curtin/Murdoch, ACT UC)",
-    "User asks about non-health profession (Engineering, IT, Accounting, Teaching)",
-    "User asks about 4-year bachelor paths in detail (CQU, JCU, USQ already partial)",
+    "Applicant mentions a state not in current data (e.g. WA Curtin/Murdoch, ACT UC)",
+    "Applicant asks about non-health profession (Engineering, IT, Accounting, Teaching)",
+    "Applicant asks about 4-year bachelor paths in detail (CQU, JCU, USQ already partial)",
     "QILT data updates (re-pull annually in February)",
     "Tuition fees update (re-pull annually in January)"
   ]

@@ -1,6 +1,6 @@
 ---
 name: study-abroad-planner
-version: "0.2.0"
+version: "0.3.0"
 description: >-
   Plan a study abroad + immigration pathway end-to-end. Collects the user's
   profile through conversation (age, English test score, education level,
@@ -13,9 +13,14 @@ description: >-
   postgraduate admission — even if the user does not explicitly ask for
   a "plan", only mentions one component (e.g. "EOI 打分" or "PTE 多少分
   能上 X 大学"). v0.2.0 adds bin/ CLI tools (eoi-calculator, aus-course-filter)
-  + data/ structured JSON for queryable school data. Privacy-first: the
-  skill contains ZERO personal data; every value is provided by the user
-  at invocation time.
+  + data/ structured JSON for queryable school data. v0.2.1 adds per-course
+  `source` field (URL + retrieved date) for full output traceability.
+  v0.3.0 chains validation→gate→analysis→tier-weighted synthesis→honesty
+  self-check into one pipeline, adds OT-specific eligibility gate (3 English
+  gates incl. AHPRA ELS, placement compliance, registration type, real
+  state-nomination criteria), source-tier passport, and pessimistic-scenario
+  branches. Privacy-first: the skill contains ZERO personal data; every value
+  is provided by the user at invocation time.
 ---
 
 # Study Abroad Planner
@@ -195,3 +200,171 @@ This is the publish gate. Run all four before any `git push` or share.
 - `references/countries.md` — UK / NZ / Canada short pathways
 - `references/data-sources.md` — canonical public sources per country
 - `examples/sample-output.md` — sample report with placeholder values
+
+## 🆕 v0.2.1 — Per-course data source tracking (2026-06-09)
+
+**v0.2.0 shipped the JSON dataset. v0.2.1 makes every output row
+traceable to the exact URL it came from:**
+
+| Change | What it does | Why it matters |
+|---|---|---|
+| Added `source` field to every course in `australian-courses.json` | Each course carries `{course_page, retrieved, verified_by}` (plus optional `verify_flag`) | When a university changes a requirement, the user can check retrieval date and decide whether to re-verify before relying on the output |
+| New `--show-source` flag in `aus-course-filter.mjs` | Prints the source block under each course in text output | Visible audit trail in the terminal — no need to inspect the JSON |
+| JSON output now includes `data_source` block | Top-level `data_source: {schema_version, last_updated, schema_note}` | Downstream consumers (other CLIs, dashboards) get provenance metadata |
+| 4 courses flagged with `verify_flag` | UTAS / Flinders (PTE vs IELTS policy), UniMelb / USyd (generic URL) | Known gaps surfaced explicitly so the user re-verifies before applying |
+
+**Backward compatible**: existing `aus-course-filter` invocations without
+`--show-source` still produce the same output as v0.2.0. The `source`
+field is additive — old consumers that ignore unknown fields keep working.
+
+**Use it**:
+
+```bash
+# Show source for every course
+node ~/.claude/skills/study-abroad-planner/bin/aus-course-filter.mjs \
+  --pte 70 --pte-each-band 65 --profession OT --show-source
+
+# JSON consumers get data_source + per-course source block
+node ~/.claude/skills/study-abroad-planner/bin/aus-course-filter.mjs \
+  --json --pte 70 ... | jq '.data_source, .results[0].source'
+```
+
+**When to re-pull data** (per `trigger_conditions_for_adding_more_courses`):
+- Annual tuition refresh (January) — every school's URL stays the same
+- QILT update (February) — employment % shifts
+- Any university page URL change — re-retrieve the course_page URL
+
+The schema now makes the freshness signal explicit: a 2024 retrieval
+date tells the user "this is old, re-check before relying on it".
+
+### 🆕 v0.2.1 — SkillSelect OT data (additional)
+
+`data/skillselect-ot-invitations.json` ships alongside the courses
+dataset — 8 historical invitation rounds for OT (ANZSCO 252411) covering
+2023-05 to 2026-03, with FY2025-26 pool metrics. Read this when the user
+asks about PR pathway timing, EOI score targets, or competitive context.
+
+### 🆕 v0.2.1 — AHPRA/OTBA/OTC pathway data (additional)
+
+`data/ahpra-ot-registration-pathway.json` documents the 2-track OT
+registration + migration skills assessment pathway:
+
+| Track | Owner | Purpose | Fee | When |
+|---|---|---|---|---|
+| AHPRA registration | AHPRA / OTBA | To legally practice as OT in AU | varies (verify at portal) | Post-graduation |
+| OTC migration skills | OTC | Required for EOI lodgement | A$800 desktop | Post-graduation, 6mo before EOI |
+
+**Critical 27 Oct 2025 change**: OTC stopped assessing qualifications for
+REGISTRATION (moved to AHPRA/OTBA's 3 new streamlined pathways), but
+OTC continues to assess for MIGRATION. Both tracks still required, separately.
+
+### 🆕 v0.2.1 — 7-school PR pathway comparison (additional)
+
+`data/seven-school-pr-pathway-comparison.json` ranks 7 Australian OT
+schools by PR pathway structural advantage using 4 proxy signals:
+
+| Signal | Why it matters |
+|---|---|
+| QILT FT employment % | Higher = better graduate outcomes |
+| Regional bonus eligibility | +5 EOI points for 491 |
+| State nomination availability | NT/TAS = easier than NSW/VIC |
+| State OT workforce density | Smaller pool = easier nomination |
+
+**Headline ranking**: CDU (Darwin NT) > UTAS (TAS) > La Trobe (Bendigo)
+> Flinders (Adelaide) > UniSA > UniMelb > USyd. Detailed PR conversion
+estimates in the data file (NOT real grant rates — AHPRA does not
+publish school-of-graduation; estimates are best-effort directional).
+
+**CRITICAL caveat**: Real PR grant rates by school are NOT publicly
+available. AHPRA does not track school of graduation in published
+statistics. Universities do not publish PR grant data. This is a
+structural ranking, not an actual outcome report.
+
+---
+
+## 🆕 v0.3.0 — 核心:把功能串成一条咬合的流水线 (Pipeline)
+
+v0.2.1 的能力是并列的;v0.3.0 要求**按固定顺序咬合执行**,信任在每一步被强制检查:
+
+```
+① validate  →  ② gate  →  ③ analyse  →  ④ synthesise(按来源等级加权)  →  ⑤ honesty self-check  →  输出
+```
+
+1. **validate** — 先跑 `node bin/source-validator.mjs`。有 ❌(缺源/社媒)直接停;有 ⚠️(过期/聚合器/待核)先标记,带着标记往下走,**不在过期数据上直接出结论**。
+2. **gate** — 资格门(见下),先抛致命硬伤 + 替代方案。
+3. **analyse** — 现有模块(course-filter / eoi-calculator / 各 JSON)。
+4. **synthesise** — 7 校排名等结论**按 `data/source-tiers.json` 的 tier 加权**:重大推荐不得仅靠 tier≥4。
+5. **honesty self-check** — 出报告前的强制自检(见下),让"诚实优先"有牙。
+
+---
+
+## 🆕 v0.3.0 — Eligibility Gate(资格门 · 含 OT 专属雷)
+
+报告**开头**先跑这一段,1 段话给出"有没有致命硬伤 + 替代方案",别让用户读完整篇才发现走不通。
+通用项(职业是否在列表、年龄是否过加分高峰、预算缺口、CRICOS 注册)照旧,**OT 专属四雷必须显式检查**:
+
+1. **三道英语门**(读 `data/ahpra-english-standard.json`)
+   - gate1 入学 / gate2 **AHPRA ELS 注册** / gate3 EOI 加分,三者独立,**真正约束 = 三者最高**。
+   - ★ **ELS 教育豁免默认按"不成立"处理**:国内非英语本科 + 单个澳洲 2 年硕士大概率不满足豁免年限,
+     仍需考试达 ELS 线。除非 AHPRA self-assessment tool 确认,否则把"考到 ELS 分"排进时间表。
+2. **临床实习合规** — OT 学位有强制 fieldwork:实习小时数、可能的乡村实习,以及 pre-placement 合规
+   (无犯罪记录证明、Working With Children Check、疫苗接种、急救/CPR,部分要 NDIS Worker Screening)。
+   这些是 OT 专属的**时间+钱+可行性**约束,需提示并尽量量化(各校官网/手册,标来源)。
+3. **临时 vs 完全注册** — 27 Oct 2025 改革后的 streamlined pathway:确认是直接 general registration,
+   还是带 supervised practice 条件的 provisional;影响"何时能执业/起算工作经验"。
+4. **州担保真实标准 ≠ 池子大小** — 7 校排名用"州 OT 注册人数"作易州担保代理(NT 最小→CDU 第一),
+   但 190/491 有**明文标准**(职业是否在该州当期列表、是否要求 state study pathway、工作承诺、
+   有时 job offer)。对推荐州(如 NT)必须核**真实提名标准**(tier 2 州政府页),不能只靠代理信号。
+
+> 任一雷亮红灯 → 先说清、给替代路径,再继续;判断都登记进 passport(带 tier + retrieved)。
+
+---
+
+## 🆕 v0.3.0 — 来源等级 & 数据护照 (Source-Tier Passport)
+
+- 每个数据点记:`{ value, source, tier, retrieved, status }`(tier/规则见 `data/source-tiers.json`)。
+- **状态标签会随时间自动降级**:validator 扫到超保鲜期 → ✅ 自动变 ⚠️;tier≥4 → ⚠️ 需佐证;缺源 → ❌。
+- **输出纪律**:报告里出现的 ✅ **必须紧跟 retrieved 日期**(无日期的 ✅ 视为未校验);
+  重大推荐(选校 / PR 可行性)**不得仅由 tier≥4 聚合器支撑**——这正是修 SkillSelect 数据来自
+  Visa Sidekick/Immitrend 的根问题:要么补 tier1 的 DHA 官方交叉佐证,要么标"待官方确认"。
+
+---
+
+## 🆕 v0.3.0 — 概率改"分级",禁止裸百分比
+
+- 7 校 PR 列**禁止**写 `85% / 75%`(AHPRA 不按学校追踪 PR,精确百分比=假精确)。
+- 改为 **Tier 排名 + 定性分级(高/中/低)+ confidence(high/medium/low)+ 所依据的代理信号**。
+  例:`CDU — PR 前景:高(confidence: medium;依据:偏远+NT 最小 OT 池子+96.4% FT 就业;
+  真实 grant-by-school 数据不公开)`。
+
+---
+
+## 🆕 v0.3.0 — 诚实自检 (Honesty Self-Check · 出报告前强制)
+
+把"诚实优先于安慰"从一句口号变成**出报告前必过的步骤**(让机制逼出诚实,不靠自觉):
+- [ ] 每个代理/估算数字都带了 caveat 与 confidence?没有裸百分比?
+- [ ] 每个 ✅ 都紧跟 retrieved 日期?validator 的 ⚠️/❌ 都在报告里如实反映?
+- [ ] 重大推荐是否仅靠 tier≥4?若是,已标"待官方确认"?
+- [ ] 档案弱处(英语/经验/预算)是否如实说明 + 给了 B 计划,而非美化?
+- [ ] 三道英语门、ELS 豁免风险是否显式呈现,未被乐观默认掩盖?
+
+---
+
+## 🆕 v0.3.0 — Re-run 与 validator 咬合
+
+- **Re-run 前先自动跑 validator**(`--strict`):关键数据若过期/降级,先拦下重查,再增量重算,
+  避免"重算建在一堆过期数据上"。
+- 增量规则不变:只重答变化项(如 PTE 重考 79 → 只重算 EOI/签证段),其余段保留;
+  并指出"这次相比上次,什么变了"。
+
+---
+
+## 🆕 v0.3.0 — 未来预案 (Pessimistic Branches · 针对 2030)
+
+被动 Re-run 之外,预先写好**主动分支 + 触发器**(分数线 4 年后高度不确定):
+- 触发器示例:`若 FY27 R1 OT 189 分数线 ≥ 90 → 启动 B 计划`:
+  - 转 491 偏远地区(NT/TAS 等)+ 州担保提名;
+  - 配偶英语/技能加分;
+  - 评估 Professional Year / NAATI 等可加分项;
+  - 必要时延后 EOI、补澳洲工作经验。
+- 每次刷新(validator 报告)后,对照触发器复核当前选路是否仍最优。

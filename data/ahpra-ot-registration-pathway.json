@@ -1,0 +1,238 @@
+{
+  "$schema": "study-abroad-planner v0.2.1 AHPRA/OTC pathway schema",
+  "version": "0.2.1",
+  "last_updated": "2026-06-09",
+  "occupation": {
+    "anzsco": "252411",
+    "title": "Occupational Therapist",
+    "registration_body": "AHPRA (Australian Health Practitioner Regulation Agency)",
+    "profession_board": "OTBA (Occupational Therapy Board of Australia)",
+    "migration_assessing_authority": "OTC (Occupational Therapy Council)"
+  },
+  "schema_note": "Pathway data for OT registration + migration skills assessment in Australia. Two parallel processes: (1) AHPRA registration to PRACTICE; (2) OTC migration skills assessment to lodge EOI. As of 27 October 2025, OTC stopped doing registration qualification assessments — those moved to AHPRA. OTC continues to do migration skills assessments as the DHA-appointed assessing authority.",
+  "key_dates": {
+    "2025-10-27": "OTBA launches 3 new streamlined pathways. OTC stops accepting Stage 1 applications for registration. AHPRA takes over qualification assessment for registration.",
+    "2025-09": "OTBA publishes full details + lists of recognised qualifications and comparable regulators",
+    "2025-05": "OTBA communique announcing new pathways"
+  },
+  "registration_pathways": [
+    {
+      "pathway": "A: Streamlined (from 27 Oct 2025)",
+      "applies_to": "International OT graduates from 27 Oct 2025 onwards",
+      "step_1": {
+        "name": "Check OTBA recognised qualification list",
+        "duration": "Same day",
+        "fee_aud": 0,
+        "owner": "Self (applicant checks OTBA website)"
+      },
+      "step_2": {
+        "name": "Apply to AHPRA for qualification assessment",
+        "duration": "4-6 weeks typical (up to 6 weeks)",
+        "fee_aud": null,
+        "note": "Fee not publicly published; check AHPRA portal for current rate",
+        "owner": "AHPRA"
+      },
+      "step_3_outcomes": {
+        "outcome_a_recognised": "Straight to General Registration — no supervised practice required",
+        "outcome_b_relevant_not_equivalent": "Practical Assessment of Competence required → supervised practice",
+        "outcome_c_not_relevant": "Cannot register; consider re-qualifying in Australia"
+      },
+      "step_4_general_registration": {
+        "name": "Apply for General Registration with AHPRA",
+        "duration": "Weeks to months (post-recognised outcome)",
+        "fee_aud": null,
+        "owner": "AHPRA / OTBA",
+        "note": "Form AGEN-96 via Ahpra portal"
+      },
+      "total_timeline_weeks": "12-26 (3-6 months) for recognised outcome; longer for relevant+supervised",
+      "english_required": "PTE 65 each / IELTS 7.0 each (AHPRA standard)"
+    },
+    {
+      "pathway": "B: Legacy (before 27 Oct 2025)",
+      "applies_to": "OTC applications submitted BEFORE 27 Oct 2025 — still being processed",
+      "step_1_otc_stage1": {
+        "name": "OTC Stage 1: Qualification assessment",
+        "duration": "Several months (current delay noted on OTC website)",
+        "fee_aud": null,
+        "owner": "OTC"
+      },
+      "step_2_limited_registration": {
+        "name": "Apply for Limited Registration (form ALPS-96) via AHPRA portal",
+        "duration": "1-2 weeks",
+        "owner": "AHPRA / OTBA"
+      },
+      "step_3_supervised_practice": {
+        "name": "6 months supervised practice under approved supervisor",
+        "duration": "6 months",
+        "fee_aud": 1500,
+        "owner": "OTC (assessment) + employer (salary)",
+        "note": "Midway report at 2-3 months; final report and COCA at end"
+      },
+      "step_4_general_registration": {
+        "name": "Apply for General Registration using COCA",
+        "duration": "Weeks",
+        "owner": "AHPRA / OTBA"
+      },
+      "total_timeline_months": "6-12",
+      "english_required": "PTE 65 each / IELTS 7.0 each"
+    }
+  ],
+  "migration_skills_assessment": {
+    "purpose": "Required for EOI lodgement under ANZSCO 252411 (subclass 189/190/491)",
+    "owner": "OTC (appointed by Department of Home Affairs)",
+    "scope": "Desktop assessment of qualifications + English proficiency",
+    "applies_to": "Both Australian-qualified international students AND international graduates",
+    "fee_aud": 800,
+    "duration": "Several months (current processing delays noted; user should apply 6 months before EOI intended date)",
+    "application_url": "https://www.otcouncil.com.au/assessment/assessment-from-overseas/",
+    "documents_required": [
+      "Qualification certificate",
+      "Academic transcripts",
+      "Proof of identity",
+      "English language test results (PTE/IELTS)",
+      "AHPRA registration (if completed)"
+    ],
+    "english_requirements": {
+      "IELTS": "7.0 overall, 7.0 each band (academic)",
+      "PTE": "65 overall, 65 each band",
+      "note": "OTC + AHPRA may have different English requirements; verify at application time"
+    }
+  },
+  "general_registration_requirements": {
+    "owner": "AHPRA / OTBA",
+    "core": [
+      "Qualification assessment (per pathway A or B above)",
+      "English language proficiency (PTE 65 each / IELTS 7.0 each)",
+      "Professional indemnity insurance",
+      "Criminal history check",
+      "Recency of practice (within last 5 years)",
+      "Application + registration fee (annual renewal)"
+    ],
+    "fees_note": "AHPRA fees published annually at https://www.ahpra.gov.au/Registration/Registration-Fees; 2025-26 rates apply"
+  },
+  "post_graduation_timeline": {
+    "scenario": "AHPRA-accredited Australian OT graduate applies post-graduation. Two parallel processes: (1) AHPRA qualification assessment → General Registration; (2) OTC migration skills assessment → EOI.",
+    "steps": [
+      {
+        "month": "M0 (graduation month)",
+        "action": "Submit AHPRA qualification assessment (Pathway A) + OTC migration skills assessment in parallel",
+        "fee_aud": 800
+      },
+      {
+        "month": "M2",
+        "action": "AHPRA assessment outcome — likely 'substantially equivalent' for an AHPRA-accredited Australian OT program (Tier 1)",
+        "fee_aud": "AHPRA fee"
+      },
+      {
+        "month": "M3",
+        "action": "Apply for General Registration with AHPRA",
+        "fee_aud": "AHPRA fee"
+      },
+      {
+        "month": "M3-M4",
+        "action": "Receive OTC migration skills assessment positive outcome",
+        "fee_aud": 0
+      },
+      {
+        "month": "M4",
+        "action": "Lodge EOI in SkillSelect with AHPRA General Registration + OTC skills assessment + 491 regional eligibility (if applicable)",
+        "fee_aud": 0
+      },
+      {
+        "month": "M4-M8",
+        "action": "Wait for invitation round (quarterly from 2026+). Verify current OT 189 minimum score at lodgement time (the threshold shifts each program year).",
+        "fee_aud": 0
+      }
+    ],
+    "earliest_invite_estimate": "Within 4-8 months of graduation (assuming eligibility thresholds met at lodgement)"
+  },
+
+  "v0_3_0_real_world_findings": {
+    "what_actually_happens_for_cdu_graduate": [
+      "Pathway A outcome 'substantially equivalent' (most likely for CDU Master) → General Registration direct, no supervised practice required",
+      "Processing time: weeks to months per AHPRA ('up to 6 weeks' for initial review, then 4-5 weeks for full assessment per current public statements)",
+      "AHPRA student registration: CDU auto-registers all OT students with AHPRA under National Law — no separate student-side action needed"
+    ],
+    "dec_2025_consultation_update": {
+      "title": "Draft registration standard: General registration for experienced internationally qualified health practitioners",
+      "consultation_closes": "2026-02-09 5:00pm AEDT",
+      "applies_to": "OT (occupational therapy) is in the consultation list along with dental / medical radiation / podiatry",
+      "three_new_pathways": "Allow experience-based registration for practitioners from comparable health systems",
+      "impact_for_cdu_grad": "Not directly relevant (CDU grad is Australian-trained, not internationally qualified) but signals regulatory trend toward more flexible pathways"
+    }
+  },
+  "fees_summary_aud": {
+    "OTC migration skills assessment": 800,
+    "OTC competence assessment (if applicable)": 1500,
+    "AHPRA qualification assessment": "Not publicly listed (verify at portal)",
+    "AHPRA registration (annual)": "Not publicly listed (verify at portal; ~$300-500 typical)",
+    "PTE / IELTS English test": "PTE ~$400 / IELTS ~$400",
+    "NAATI translation (if needed)": "$80-200 per document",
+    "typical_total_first_year": 1500
+  },
+  "english_requirements_summary": {
+    "AHPRA registration": "PTE 65 each / IELTS 7.0 each",
+    "OTC migration assessment": "PTE 65 each / IELTS 7.0 each (academic)",
+    "CDU Master of OT entry (current)": "PTE 65 overall + 58 each (lower bar)",
+    "PTE 79+ for EOI superior (20 points)": "PTE 79 each / IELTS 8.0 each"
+  },
+  "data_sources": [
+    {
+      "name": "AHPRA International Practitioners",
+      "url": "https://www.ahpra.gov.au/Registration/International-practitioners",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "AHPRA Occupational Therapy Board — Competence Assessment",
+      "url": "https://www.occupationaltherapyboard.gov.au/Registration/Internationally-qualified-occupational-therapists/Competence-assessment.aspx",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "OTC Assessment for Skilled Migration",
+      "url": "https://www.otcouncil.com.au/assessment/assessment-from-overseas/",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "OTC New Pathways Communique (May 2025)",
+      "url": "https://www.otcouncil.com.au/communique-from-otba-new-pathways-to-registration-and-international-qualification-assessments-from-late-2025-may-2025/",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "CanApprove OTC Skill Assessment Guide",
+      "url": "https://canapprove.com/blog/otc-skill-assessment-for-occupational-therapists/",
+      "type": "Industry guide (republishes official info)",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "Mediix OT Registration Guide",
+      "url": "https://mediix.com.au/how-to-register-as-an-occupational-therapists-in-australia/",
+      "type": "Industry guide",
+      "reliability": "medium-high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "AusPath Streamlined Pathways",
+      "url": "https://www.crm.auspath.agency/occupationaltherapists/",
+      "type": "Migration agency",
+      "reliability": "medium-high",
+      "retrieved": "2026-06-09"
+    }
+  ],
+  "key_caveats": [
+    "27 Oct 2025 was a major change — pre-2025 timelines no longer apply for new applicants",
+    "AHPRA fees are reviewed annually — current 2025-26 rates; verify before application",
+    "OTC skills assessment processing times have known delays (mentioned on OTC site)",
+    "PTE/IELTS test centres may have wait times — book 2-3 months in advance",
+    "AHPRA qualification assessment outcome is NOT transferable to OTC migration assessment — they are separate processes with separate fees",
+    "Supervised practice requires finding an Australian employer willing to sponsor limited registration — can be a bottleneck"
+  ]
+}

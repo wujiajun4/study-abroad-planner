@@ -1,0 +1,103 @@
+{
+  "$schema": "study-abroad-planner v0.3.0 source-tier schema",
+  "version": "0.3.0",
+  "last_updated": "2026-06-10",
+  "schema_note": "5-tier source classification + freshness periods. Used by source-validator.mjs to grade every datum, and by synthesizer to gate major recommendations. Major recommendations (school choice, PR feasibility) must NOT rely solely on tier ≥ 4 sources.",
+
+  "tiers": {
+    "tier_1": {
+      "name": "Government / university primary",
+      "description": "First-party official source. Government agency or university publishing the data itself.",
+      "examples": [
+        "Department of Home Affairs (DHA) — immi.homeaffairs.gov.au",
+        "University course pages (e.g. CDU, UTAS, La Trobe)",
+        "CRICOS registry — cricos.education.gov.au",
+        "Home Affairs SkillSelect invitation rounds page",
+        "QILT raw data CSV downloads"
+      ],
+      "trust": "highest — use as primary evidence for any major recommendation"
+    },
+    "tier_2": {
+      "name": "Statutory / regulatory body",
+      "description": "Authoritative body publishing in their statutory role (not the regulator, but a body established by statute to publish specific data).",
+      "examples": [
+        "AHPRA annual reports & registration statistics",
+        "Occupational Therapy Board of Australia (OTBA) communiques",
+        "Occupational Therapy Council (OTC) — designated assessing authority",
+        "Department of Education — higher education completion rates",
+        "Jobs and Skills Australia — Skills Priority List"
+      ],
+      "trust": "high — use as primary evidence; minor delay between event and publication is normal"
+    },
+    "tier_3": {
+      "name": "Industry / professional body",
+      "description": "Industry association, professional society, or not-for-profit research org.",
+      "examples": [
+        "Occupational Therapy Australia (OTA)",
+        "AHPRA Newsletter (interpretive, not raw data)",
+        "OTC newsletter / communique (interpretive)",
+        "MARA / OISC / ICCRC industry notices"
+      ],
+      "trust": "medium-high — good for context, but check the underlying primary source before using for major decisions"
+    },
+    "tier_4": {
+      "name": "Third-party aggregator / analysis",
+      "description": "Commercial or volunteer site that republishes / analyzes primary data. The site adds interpretation or aggregation, not the underlying source.",
+      "examples": [
+        "Immitrend (immitrend.com.au — pool analytics, cutoff predictions)",
+        "MigrationPages (migrationpages.com.au — invitation round tracker)",
+        "Visa Sidekick (visasidekick.com.au — republishes DHA official lists)",
+        "VisaIQ (visaiq.com.au — 189 live tracker)",
+        "SmartVisaGuide (smartvisaguide.com — paid tier with DHA data)",
+        "ONEderland Consulting (onederland.com.au — March 2026 OT range)",
+        "KBA Global / EasyMigrate / CanApprove / Mediix (migration agency blogs)"
+      ],
+      "trust": "medium — useful for orientation, but NOT primary evidence. Major recommendations must NOT rely solely on tier 4.",
+      "common_issue": "Tertiary interpretation of DHA data may add 1-3 day lag, paraphrase inaccurate, or apply generic formulas to specific occupations"
+    },
+    "tier_5": {
+      "name": "Social media / forums",
+      "description": "User-generated content. NOT to be used as evidence in any conclusion.",
+      "examples": [
+        "Reddit r/AusVisa, r/ImmigrationCanada",
+        "Facebook groups (e.g. 'Australia Skilled Visa')",
+        "Whirlpool forums",
+        "Personal blogs",
+        "Poms in Oz / Canadians in Aus"
+      ],
+      "trust": "lowest — explicitly BANNED from major recommendations. May be used as orientation signal only with explicit ⚠️ caveat."
+    }
+  },
+
+  "freshness_periods_days": {
+    "skillselect_invitation_cutoff": 45,
+    "skillselect_dashboard_metrics": 30,
+    "ahpra_registration_statistics": 180,
+    "tuition_fees": 365,
+    "visa_fees_and_gs_rules": 30,
+    "occupation_lists_mltssl_stsol_rol": 180,
+    "qilt_graduate_outcomes": 365,
+    "ahpra_els_standard": 365,
+    "otba_pathway_reforms": 180,
+    "state_nomination_criteria": 90,
+    "scholarship_percentages": 365
+  },
+
+  "freshness_explanation": "Days after which a datum should be re-verified. The validator auto-degrades ✅ to ⚠️ when age exceeds the freshness period for its data type. SkillSelect cutoffs are most volatile (45 days); scholarship % stable for 1 year.",
+
+  "output_discipline": {
+    "rule_1_each_checkmark_needs_date": "Every ✅ label must be immediately followed by the retrieval date. ✅ without date = 'unverified'.",
+    "rule_2_no_tier_5_in_conclusions": "tier 5 (social media) may not appear as evidence in any recommendation or conclusion.",
+    "rule_3_no_tier_4_alone_for_major": "Major recommendations (school choice, PR feasibility) must NOT rely on tier 4 alone. Either cross-reference tier 1, or label as 'pending official confirmation'.",
+    "rule_4_explicit_tier_and_status": "Every datum used in output should carry both tier and status (✅/⚠️/❌). The validator assigns these; the synthesizer respects them.",
+    "rule_5_validator_cannot_be_disabled": "Source-validator.mjs is the gate before synthesis. Cannot be skipped except in an explicit --no-validate override (logged)."
+  },
+
+  "verification_examples": {
+    "good": "CDU Master of OT — tuition $34,736/y ✅ tier_1 (CDU official) — retrieved 2026-06-09",
+    "good": "SkillSelect 13 Nov 2025 OT cutoff 75 — tier_4 (Visa Sidekick republishing DHA) ⚠️ awaiting tier_1 cross-verification — retrieved 2026-06-09",
+    "bad": "CDU Master of OT — tuition $34,736/y ✅  (no date, no tier)",
+    "bad": "OT cutoff 65  (no source, no tier, no date — forbidden)",
+    "bad": "User said on Reddit 189 will be 90 next year ❌ (tier 5, banned)"
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "$schema": "study-abroad-planner v0.2.1 skillselect data schema",
+  "version": "0.2.1",
+  "last_updated": "2026-06-09",
+  "occupation": {
+    "anzsco": "252411",
+    "anzsco_alt": "252711",
+    "title": "Occupational Therapist",
+    "list": "MLTSSL",
+    "assessing_authority": "OTC (Occupational Therapy Council)"
+  },
+  "schema_note": "Historical SkillSelect invitation rounds for OT (subclass 189 point-tested + 491 family-sponsored). All cutoffs are FINAL official DHA values unless noted. N/A* = ceiling reached / not invited that round. Range = upper and lower points observed in that round's invite pool (not a single cutoff). For 189 vs 491, both subclasses are tracked. Sources: DHA SkillSelect dashboard, visaiq.com.au, immitrend.com.au, ONEderland Consulting, migrationpages.com.au.",
+  "invitation_rounds": [
+    {
+      "date": "2023-05-25",
+      "program_year": "2022-23",
+      "visa_subclass": "189",
+      "ot_cutoff_points": null,
+      "ot_cutoff_note": "N/A* — occupational ceiling reached, no OT invitations issued in this round",
+      "ot_invited_count": 0,
+      "total_invited": null,
+      "tie_break": "05/2023",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2024-06-13",
+      "program_year": "2023-24",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 85,
+      "ot_cutoff_note": "Initial cutoff was 65, lifted to 85 mid-round as ceiling was approached",
+      "ot_invited_count": null,
+      "total_invited": 5292,
+      "tie_break": "05/2024",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2024-09-05",
+      "program_year": "2024-25",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 75,
+      "ot_cutoff_note": "Cutoff stable — occupation ceiling not reached this round",
+      "ot_invited_count": null,
+      "total_invited": 5292,
+      "tie_break": "05/2024",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2024-11-07",
+      "program_year": "2024-25",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 75,
+      "ot_cutoff_note": "Major round — 15,000 invitations issued (largest 2024-25)",
+      "ot_invited_count": null,
+      "total_invited": 15000,
+      "tie_break": "12/2022",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2025-08-21",
+      "program_year": "2025-26",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 80,
+      "ot_cutoff_note": "FY2025-26 round 1 — 6,887 total invitations, OT minimum 80",
+      "ot_invited_count": null,
+      "total_invited": 6887,
+      "tie_break": "08/2025",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2025-11-13",
+      "program_year": "2025-26",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 75,
+      "ot_cutoff_range_low": 65,
+      "ot_cutoff_range_high": 90,
+      "ot_cutoff_note": "Range 65-90 — multiple points levels invited in this round",
+      "ot_invited_count": null,
+      "total_invited": 10000,
+      "tie_break": "11/2025",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official + Visa Sidekick official list",
+      "reliability": "high"
+    },
+    {
+      "date": "2025-11-13",
+      "program_year": "2025-26",
+      "visa_subclass": "491",
+      "ot_cutoff_points": 80,
+      "ot_cutoff_note": "Family-sponsored stream — 300 total 491 invitations this round",
+      "ot_invited_count": null,
+      "total_invited": 300,
+      "tie_break": "05/2025",
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "source_type": "DHA official",
+      "reliability": "high"
+    },
+    {
+      "date": "2026-03",
+      "program_year": "2025-26",
+      "visa_subclass": "189",
+      "ot_cutoff_points": 75,
+      "ot_cutoff_range_low": 65,
+      "ot_cutoff_range_high": 85,
+      "ot_cutoff_note": "Range 65-85 — preliminary data from SkillSelect Dashboard",
+      "ot_invited_count": null,
+      "total_invited": null,
+      "tie_break": null,
+      "source_url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/dashboard",
+      "source_type": "SkillSelect Dashboard (via ONEderland Consulting)",
+      "reliability": "medium",
+      "verify_flag": "Single-source — cross-check with DHA official round announcement when published"
+    }
+  ],
+  "fy2025_26_metrics": {
+    "as_of": "2026-02-28",
+    "active_eois": 11498,
+    "eois_at_or_above_85": 1953,
+    "spots_remaining_fy": 1027,
+    "ratio_eois_to_spots": 11.2,
+    "implied_difficulty": "extreme — only 1,953 of 11,498 EOIs (17%) meet the 85-point floor, but only 1,027 spots remain",
+    "source_url": "https://immitrend.com.au/189-prediction",
+    "source_type": "Immitrend (3rd-party analysis on DHA data)",
+    "reliability": "medium-high"
+  },
+  "trend_analysis": {
+    "cutoff_direction_12mo": "stable-to-rising",
+    "cutoff_direction_summary": "OT 189 cutoffs: 85 (Jun 24) → 75 (Sep 24) → 75 (Nov 24) → 80 (Aug 25) → 75 (Nov 25). The 80 spike in Aug 25 likely reflects FY-start catch-up demand. Net trend: stable around 75-80 with periodic spikes to 85.",
+    "demand_signal": "Active EOIs 11,498 with only 1,027 FY spots remaining → 11.2:1 EOI-to-spot ratio. OT is currently one of the most oversubscribed occupations.",
+    "ceiling_reached_history": "May 2023 (FY22-23) — no OT issued; ceiling reached before OT candidates",
+    "implications_for_applicant": {
+      "minimum_competitive_score": 85,
+      "recommended_target_score": "90+ to be safely above the floor",
+      "tie_break_advantage": "Lodge EOI as early as possible (date-of-effect is tie-breaker for equal scores)",
+      "alternative_pathway": "491 (state-nominated) and 190 are less competitive if the applicant is willing to live in a regional/state-nominated area"
+    }
+  },
+  "data_sources": [
+    {
+      "name": "DHA SkillSelect Previous Rounds",
+      "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "DHA SkillSelect Dashboard",
+      "url": "https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/dashboard",
+      "type": "Official — primary",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "Immitrend 189 Prediction",
+      "url": "https://immitrend.com.au/189-prediction",
+      "type": "3rd-party analysis",
+      "reliability": "medium-high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "MigrationPages Invitation Round Tracker",
+      "url": "https://www.migrationpages.com.au/tools/invitation-round-tracker",
+      "type": "3rd-party tracker",
+      "reliability": "medium",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "Visa Sidekick Official List FY2025-26",
+      "url": "https://visasidekick.com.au/news/189-invitationround1-fy26-list2",
+      "type": "Industry news (republishes DHA official list)",
+      "reliability": "high",
+      "retrieved": "2026-06-09"
+    },
+    {
+      "name": "VisaIQ 189 Live Tracker",
+      "url": "https://www.visaiq.com.au/189-visa",
+      "type": "3rd-party tracker",
+      "reliability": "medium-high",
+      "retrieved": "2026-06-09"
+    }
+  ],
+  "caveats_and_limitations": [
+    "DHA publishes 189 round results in batches; some rounds from late 2025 / early 2026 may not yet be in this dataset",
+    "OT-specific invitation counts are rarely published — only the minimum points score per round is officially published",
+    "491 family-sponsored stream uses different eligibility; 491 state-nominated invitations are issued continuously by states/territories and are NOT in this dataset",
+    "The 65 → 85 cutoff shift in June 2024 is a known SkillSelect pattern: initial cutoff = top-ranked pool, then lifts as more invitations are issued against the ceiling",
+    "All data is INFERRED from publicly republished DHA announcements. Verify against https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/previous-rounds for the final word"
+  ]
+}
